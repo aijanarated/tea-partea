@@ -3,1149 +3,564 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>18 — Mazonty</title>
+<title>mazonty.exe 🎂</title>
 
 <style>
-
 /* =========================================================
-   RESET
+   BASIC
 ========================================================= */
 
 *{
+    box-sizing:border-box;
     margin:0;
     padding:0;
-    box-sizing:border-box;
 }
 
-html{
-    scroll-behavior:smooth;
+html,
+body{
+    width:100%;
+    height:100%;
+    overflow:hidden;
 }
 
 body{
-    background:#101114;
-    color:#f8f1e7;
-    font-family:Arial,Helvetica,sans-serif;
-    overflow-x:hidden;
-}
+    font-family:
+        "Trebuchet MS",
+        Arial,
+        sans-serif;
 
-button{
-    font:inherit;
-}
-
-a{
-    color:inherit;
-    text-decoration:none;
+    background:#26352f;
+    color:#fff8ec;
 }
 
 
 /* =========================================================
-   VARIABLES
+   MAIN WORLD
 ========================================================= */
 
-:root{
-    --cream:#f8f1e7;
-    --paper:#f3eadc;
-    --ink:#202027;
+#world{
+    position:relative;
 
-    --red:#d96973;
-    --pink:#e899a8;
-    --yellow:#e9bf62;
-    --blue:#719bc2;
-    --green:#8ca87d;
+    width:100vw;
+    height:100vh;
 
-    --dark:#101114;
-    --dark2:#18191e;
-    --line:rgba(255,255,255,.13);
-}
-
-
-/* =========================================================
-   CURSOR GLOW
-========================================================= */
-
-#cursorGlow{
-    position:fixed;
-    z-index:9999;
-
-    width:260px;
-    height:260px;
-
-    pointer-events:none;
-
-    border-radius:50%;
+    overflow:hidden;
 
     background:
         radial-gradient(
-            circle,
-            rgba(233,191,98,.09),
-            transparent 65%
-        );
-
-    transform:translate(-50%,-50%);
-}
-
-
-/* =========================================================
-   PROGRESS
-========================================================= */
-
-#progressBar{
-    position:fixed;
-    z-index:9998;
-
-    top:0;
-    left:0;
-
-    width:0;
-    height:3px;
-
-    background:
+            circle at 50% 45%,
+            rgba(245,202,120,.16),
+            transparent 32%
+        ),
         linear-gradient(
-            90deg,
-            var(--pink),
-            var(--yellow),
-            var(--blue)
+            135deg,
+            #31473f 0%,
+            #24352f 55%,
+            #1d2926 100%
         );
 }
 
 
+/* subtle texture */
+
+#world::before{
+    content:"";
+
+    position:absolute;
+    inset:0;
+
+    pointer-events:none;
+
+    opacity:.12;
+
+    background-image:
+        radial-gradient(#fff 1px,transparent 1px);
+
+    background-size:23px 23px;
+}
+
+
 /* =========================================================
-   FLOATING DECOR
+   TOP BAR
 ========================================================= */
 
-.decor{
-    position:fixed;
-    pointer-events:none;
-    z-index:2;
+.topbar{
+    position:absolute;
 
-    opacity:.35;
+    top:18px;
+    left:20px;
+    right:20px;
+
+    z-index:100;
+
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+
+    pointer-events:none;
+}
+
+.logo{
+    pointer-events:auto;
+
+    padding:9px 14px;
+
+    border-radius:13px;
+
+    background:#fff1d6;
+    color:#27352f;
+
+    font-weight:900;
+    font-size:14px;
+
+    box-shadow:
+        4px 5px 0 rgba(0,0,0,.18);
+
+    transform:rotate(-2deg);
+}
+
+.nav{
+    display:flex;
+    gap:7px;
+
+    pointer-events:auto;
+}
+
+.nav button{
+    border:0;
+
+    padding:9px 13px;
+
+    border-radius:20px;
+
+    cursor:pointer;
+
+    background:rgba(255,255,255,.13);
+    color:#fff8ec;
+
+    backdrop-filter:blur(10px);
+
+    transition:.2s;
+}
+
+.nav button:hover{
+    background:#f0bd67;
+    color:#27352f;
+
+    transform:translateY(-2px);
+}
+
+
+/* =========================================================
+   MAIN TITLE
+========================================================= */
+
+.title{
+    position:absolute;
+
+    left:50%;
+    top:12%;
+
+    transform:translateX(-50%);
+
+    z-index:10;
+
+    text-align:center;
+
+    pointer-events:none;
+
+    width:90%;
+}
+
+.title .tiny{
+    font-size:10px;
+
+    letter-spacing:4px;
+
+    text-transform:uppercase;
+
+    opacity:.65;
+}
+
+.title h1{
+    margin-top:7px;
+
+    font-family:
+        "Arial Rounded MT Bold",
+        Arial,
+        sans-serif;
+
+    font-size:
+        clamp(42px,7vw,88px);
+
+    line-height:.9;
+
+    color:#fff2d8;
+
+    text-shadow:
+        5px 6px 0 #bf6d61;
+
+    transform:rotate(-2deg);
+}
+
+.title p{
+    margin-top:12px;
+
+    font-size:13px;
+
+    opacity:.75;
+}
+
+
+/* =========================================================
+   DECORATIONS
+========================================================= */
+
+.balloon{
+    position:absolute;
+
+    width:38px;
+    height:48px;
+
+    border-radius:
+        50% 50% 47% 47%;
+
+    z-index:3;
+
+    cursor:pointer;
 
     animation:
-        drift 8s infinite ease-in-out;
+        float 4s ease-in-out infinite;
+
+    transition:.2s;
 }
 
-.decor.one{
-    width:12px;
-    height:12px;
-
-    background:var(--yellow);
-
-    left:8%;
-    top:20%;
+.balloon:hover{
+    scale:1.15;
 }
 
-.decor.two{
-    width:8px;
-    height:16px;
+.balloon::after{
+    content:"";
 
-    background:var(--pink);
+    position:absolute;
 
-    right:12%;
-    top:32%;
+    width:1px;
+    height:80px;
+
+    background:rgba(255,255,255,.35);
+
+    top:46px;
+    left:50%;
+}
+
+.balloon.a{
+    left:7%;
+    top:19%;
+
+    background:#e89191;
+
+    transform:rotate(-8deg);
+}
+
+.balloon.b{
+    right:8%;
+    top:18%;
+
+    background:#e8bf69;
 
     animation-delay:1s;
 }
 
-.decor.three{
-    width:10px;
-    height:10px;
+.balloon.c{
+    right:17%;
+    bottom:10%;
 
-    background:var(--blue);
+    background:#82a9c4;
 
-    left:18%;
-    top:70%;
-
-    animation-delay:2s;
+    animation-delay:1.8s;
 }
 
-.decor.four{
-    width:13px;
-    height:7px;
-
-    background:var(--green);
-
-    right:20%;
-    top:75%;
-
-    animation-delay:3s;
-}
-
-@keyframes drift{
-
-    0%,100%{
-        transform:
-            translateY(0)
-            rotate(0);
-    }
-
+@keyframes float{
     50%{
         transform:
-            translateY(-35px)
-            rotate(160deg);
+            translateY(-14px)
+            rotate(4deg);
     }
 }
 
 
 /* =========================================================
-   HERO
+   TABLE / DESK BASE
 ========================================================= */
 
-.hero{
-    min-height:100vh;
-
-    position:relative;
-
-    display:flex;
-    align-items:center;
-    justify-content:center;
-
-    overflow:hidden;
-
-    background:
-        radial-gradient(
-            circle at 25% 20%,
-            rgba(113,155,194,.35),
-            transparent 35%
-        ),
-        radial-gradient(
-            circle at 80% 70%,
-            rgba(217,105,115,.22),
-            transparent 35%
-        ),
-        #101114;
-}
-
-.hero::before{
-    content:"";
-
+.desk{
     position:absolute;
 
-    width:900px;
-    height:900px;
-
-    border-radius:50%;
-
-    border:1px solid rgba(255,255,255,.06);
-
-    transform:translateY(-25%);
-}
-
-.hero::after{
-    content:"";
-
-    position:absolute;
-
-    width:650px;
-    height:650px;
-
-    border-radius:50%;
-
-    border:1px solid rgba(255,255,255,.05);
-
-    transform:translateY(-25%);
-}
-
-
-.heroContent{
-    position:relative;
-    z-index:5;
-
-    width:min(1000px,90%);
-
-    text-align:center;
-}
-
-
-.kicker{
-    text-transform:uppercase;
-
-    letter-spacing:7px;
-
-    font-size:11px;
-
-    color:#aaa5a0;
-
-    margin-bottom:25px;
-
-    animation:fadeUp 1s ease both;
-}
-
-
-.hero h1{
-    font-family:Georgia,"Times New Roman",serif;
-
-    font-weight:400;
-
-    font-size:
-        clamp(5rem,18vw,13rem);
-
-    line-height:.75;
-
-    letter-spacing:-10px;
-
-    animation:
-        heroTitle 1.3s cubic-bezier(.16,1,.3,1) both;
-}
-
-
-.hero h1 span{
-    color:var(--yellow);
-}
-
-
-.heroName{
-    margin-top:35px;
-
-    font-family:
-        "Brush Script MT",
-        cursive;
-
-    font-size:
-        clamp(2.5rem,7vw,5.5rem);
-
-    transform:rotate(-4deg);
-
-    color:#f4d9b0;
-
-    animation:fadeUp 1.2s .35s both;
-}
-
-
-.heroText{
-    max-width:500px;
-
-    margin:35px auto 0;
-
-    color:#aaa6a1;
-
-    line-height:1.8;
-
-    font-size:14px;
-
-    animation:fadeUp 1.2s .55s both;
-}
-
-
-.scrollHint{
-    position:absolute;
-
-    bottom:30px;
     left:50%;
+    bottom:-5%;
 
     transform:translateX(-50%);
 
-    color:#777;
-
-    font-size:10px;
-
-    text-transform:uppercase;
-
-    letter-spacing:4px;
-
-    animation:
-        bounce 2s infinite;
-}
-
-@keyframes bounce{
-    50%{
-        transform:
-            translate(-50%,8px);
-    }
-}
-
-@keyframes fadeUp{
-    from{
-        opacity:0;
-        transform:translateY(25px);
-    }
-
-    to{
-        opacity:1;
-        transform:translateY(0);
-    }
-}
-
-@keyframes heroTitle{
-    from{
-        opacity:0;
-        transform:
-            scale(.75)
-            translateY(50px);
-    }
-
-    to{
-        opacity:1;
-        transform:
-            scale(1)
-            translateY(0);
-    }
-}
-
-
-/* =========================================================
-   INTRO
-========================================================= */
-
-.intro{
-    position:relative;
-
-    min-height:90vh;
-
-    padding:
-        160px 7vw;
-
-    display:grid;
-
-    grid-template-columns:
-        1fr 1fr;
-
-    gap:80px;
-
-    align-items:center;
-
-    background:
-        #f0e7d9;
-
-    color:#28252a;
-}
-
-
-.introLeft{
-    position:relative;
-}
-
-
-.stamp{
-    display:inline-block;
-
-    padding:9px 15px;
-
-    border:
-        1px solid #9b8770;
-
-    color:#8d7966;
-
-    text-transform:uppercase;
-
-    letter-spacing:3px;
-
-    font-size:9px;
-
-    transform:rotate(-3deg);
-
-    margin-bottom:25px;
-}
-
-
-.intro h2{
-    font-family:Georgia,serif;
-
-    font-size:
-        clamp(3rem,7vw,6rem);
-
-    font-weight:400;
-
-    line-height:.95;
-}
-
-
-.intro h2 em{
-    color:#c65e68;
-}
-
-
-.introText{
-    margin-top:30px;
-
-    max-width:500px;
-
-    line-height:2;
-
-    color:#68615b;
-
-    font-size:15px;
-}
-
-
-.introRight{
-    position:relative;
-
-    min-height:500px;
-}
-
-
-.note{
-    position:absolute;
-
-    padding:35px;
-
-    width:300px;
-
-    box-shadow:
-        0 20px 45px rgba(40,30,20,.18);
-
-    color:#292329;
-}
-
-
-.note.yellow{
-    background:#f0ce75;
-
-    top:20px;
-    left:10%;
-
-    transform:rotate(6deg);
-}
-
-
-.note.pink{
-    background:#e99baa;
-
-    top:190px;
-    right:0;
-
-    transform:rotate(-5deg);
-}
-
-
-.note.blue{
-    background:#8fb5d3;
-
-    bottom:0;
-    left:5%;
-
-    transform:rotate(3deg);
-}
-
-
-.note small{
-    text-transform:uppercase;
-
-    letter-spacing:2px;
-
-    font-size:8px;
-
-    opacity:.55;
-}
-
-
-.note p{
-    margin-top:18px;
-
-    font-family:
-        Georgia,serif;
-
-    font-size:25px;
-
-    line-height:1.1;
-}
-
-
-/* =========================================================
-   CHAPTER DIVIDERS
-========================================================= */
-
-.chapter{
-    min-height:40vh;
-
-    display:flex;
-
-    align-items:center;
-
-    justify-content:center;
-
-    text-align:center;
-
-    position:relative;
-
-    overflow:hidden;
-}
-
-
-.chapter.dark{
-    background:#111217;
-}
-
-
-.chapter.light{
-    background:#e8ded0;
-
-    color:#28242a;
-}
-
-
-.chapter h2{
-    font-family:Georgia,serif;
-
-    font-weight:400;
-
-    font-size:
-        clamp(4rem,11vw,10rem);
-
-    letter-spacing:-5px;
-}
-
-
-.chapter p{
-    margin-top:15px;
-
-    color:#89837d;
-
-    letter-spacing:2px;
-
-    text-transform:uppercase;
-
-    font-size:9px;
-}
-
-
-/* =========================================================
-   PHOTO GALLERY
-========================================================= */
-
-.gallery{
-    position:relative;
-
-    min-height:115vh;
-
-    padding:
-        150px 7vw;
-
-    background:
-        #17181d;
-
-    overflow:hidden;
-}
-
-
-.galleryHeader{
-    display:flex;
-
-    justify-content:space-between;
-
-    align-items:flex-end;
-
-    margin-bottom:100px;
-}
-
-
-.galleryHeader span{
-    color:#777;
-
-    text-transform:uppercase;
-
-    letter-spacing:5px;
-
-    font-size:9px;
-}
-
-
-.galleryHeader h2{
-    font-family:Georgia,serif;
-
-    font-weight:400;
-
-    font-size:
-        clamp(3rem,7vw,7rem);
-}
-
-
-.galleryHeader p{
-    max-width:250px;
-
-    color:#777;
-
-    line-height:1.7;
-
-    font-size:12px;
-}
-
-
-.galleryGrid{
-    position:relative;
-
-    max-width:1100px;
-
-    min-height:750px;
-
-    margin:auto;
-}
-
-
-.memory{
-    position:absolute;
-
-    width:
-        clamp(190px,28vw,340px);
-
-    padding:12px 12px 42px;
-
-    background:#f6f0e5;
-
-    color:#28242a;
-
-    box-shadow:
-        0 30px 60px rgba(0,0,0,.4);
-
-    cursor:pointer;
-
-    transition:
-        transform .6s cubic-bezier(.16,1,.3,1),
-        box-shadow .6s;
-
-    z-index:3;
-}
-
-
-.memory:hover{
-    transform:
-        translateY(-25px)
-        rotate(0)
-        scale(1.04)!important;
-
-    box-shadow:
-        0 45px 80px rgba(0,0,0,.5);
-
-    z-index:20;
-}
-
-
-.memory img{
-    width:100%;
-
-    height:270px;
-
-    object-fit:cover;
-
-    display:block;
-
-    background:#b9b0a5;
-}
-
-
-.memoryCaption{
-    margin-top:14px;
-
-    font-family:
-        "Brush Script MT",
-        cursive;
-
-    font-size:22px;
-
-    text-align:center;
-
-    line-height:1.1;
-}
-
-
-.memory1{
-    left:0;
-    top:40px;
-
-    transform:rotate(-7deg);
-}
-
-
-.memory2{
-    right:4%;
-    top:130px;
-
-    transform:rotate(6deg);
-}
-
-
-.memory3{
-    left:32%;
-    top:390px;
-
-    transform:rotate(-3deg);
-}
-
-
-.tape{
-    position:absolute;
-
-    width:75px;
-    height:22px;
-
-    top:-12px;
-    left:50%;
-
-    transform:
-        translateX(-50%)
-        rotate(-2deg);
-
-    background:
-        rgba(234,208,157,.8);
-
-    z-index:4;
-}
-
-
-/* =========================================================
-   LITTLE DETAILS
-========================================================= */
-
-.details{
-    min-height:100vh;
-
-    padding:
-        150px 7vw;
+    width:min(1100px,94vw);
+    height:45vh;
 
     background:
         linear-gradient(
             135deg,
-            #e8b2ba,
-            #f0d083 50%,
-            #8ca9c0
+            #7a5540,
+            #51382e
         );
 
-    color:#29242a;
-}
+    border-radius:
+        35px 35px 0 0;
 
+    box-shadow:
+        0 -15px 50px rgba(0,0,0,.22);
 
-.detailsHeader{
-    max-width:650px;
-
-    margin-bottom:90px;
-}
-
-
-.detailsHeader h2{
-    font-family:Georgia,serif;
-
-    font-weight:400;
-
-    font-size:
-        clamp(3.5rem,8vw,8rem);
-
-    line-height:.9;
-}
-
-
-.detailsHeader p{
-    margin-top:25px;
-
-    max-width:500px;
-
-    line-height:1.8;
-
-    color:#5d5350;
-}
-
-
-.facts{
-    display:grid;
-
-    grid-template-columns:
-        repeat(4,1fr);
-
-    gap:2px;
-
-    max-width:1200px;
-
-    margin:auto;
-}
-
-
-.fact{
-    min-height:280px;
-
-    padding:35px;
-
-    display:flex;
-
-    flex-direction:column;
-
-    justify-content:space-between;
-
-    background:rgba(255,255,255,.32);
-
-    backdrop-filter:blur(10px);
-
-    border:
-        1px solid rgba(255,255,255,.35);
-
-    transition:
-        transform .4s,
-        background .4s;
-}
-
-
-.fact:hover{
-    transform:translateY(-10px);
-
-    background:rgba(255,255,255,.5);
-}
-
-
-.factNumber{
-    font-size:9px;
-
-    letter-spacing:3px;
-
-    opacity:.55;
-}
-
-
-.fact h3{
-    font-family:Georgia,serif;
-
-    font-size:28px;
-
-    font-weight:400;
-}
-
-
-.fact p{
-    color:#625a55;
-
-    font-size:12px;
-
-    line-height:1.7;
+    border-top:
+        5px solid #9b7052;
 }
 
 
 /* =========================================================
-   TEA MOTIF
+   TEA
 ========================================================= */
 
-.teaSection{
-    min-height:90vh;
+.tea{
+    position:absolute;
 
-    position:relative;
+    left:50%;
+    top:43%;
 
-    overflow:hidden;
+    transform:
+        translate(-50%,-50%);
 
-    display:flex;
+    width:170px;
+    height:115px;
 
-    align-items:center;
+    cursor:pointer;
 
-    justify-content:center;
+    z-index:20;
 
-    text-align:center;
+    transition:
+        transform .3s;
+}
 
-    background:
-        radial-gradient(
-            circle at center,
-            #42564e,
-            #15171a 65%
-        );
+.tea:hover{
+    transform:
+        translate(-50%,-50%)
+        rotate(-3deg)
+        scale(1.05);
 }
 
 
-.teaSection::before{
+/* cup */
+
+.cup{
+    position:absolute;
+
+    left:25px;
+    bottom:5px;
+
+    width:120px;
+    height:72px;
+
+    border-radius:
+        0 0 45px 45px;
+
+    background:
+        linear-gradient(
+            90deg,
+            #fff4dc,
+            #e8d1b0
+        );
+
+    box-shadow:
+        0 12px 15px rgba(0,0,0,.25);
+}
+
+
+/* tea inside */
+
+.cup::before{
     content:"";
 
     position:absolute;
 
-    width:500px;
-    height:500px;
+    left:10px;
+    top:-8px;
+
+    width:100px;
+    height:23px;
+
+    border-radius:50%;
+
+    background:#7b4932;
 
     border:
-        1px solid rgba(240,207,132,.16);
-
-    border-radius:50%;
+        5px solid #f3dfbd;
 }
 
 
-.teaSteam{
+/* handle */
+
+.handle{
     position:absolute;
 
-    width:35px;
-    height:170px;
+    right:3px;
+    bottom:24px;
+
+    width:42px;
+    height:40px;
+
+    border:
+        9px solid #ecd9b9;
+
+    border-left:0;
+
+    border-radius:
+        0 50% 50% 0;
+}
+
+
+/* steam */
+
+.steam{
+    position:absolute;
+
+    bottom:75px;
+
+    width:24px;
+    height:70px;
 
     border-left:
-        2px solid rgba(255,255,255,.15);
+        3px solid rgba(255,255,255,.18);
 
     border-radius:50%;
 
-    filter:blur(2px);
+    filter:blur(1px);
 
     animation:
-        teaFloat 4s infinite ease-in-out;
+        steam 3s infinite ease-in-out;
 }
 
-
-.teaSteam.one{
-    transform:translate(-100px,-120px) rotate(5deg);
+.steam.s1{
+    left:55px;
 }
 
-
-.teaSteam.two{
-    transform:translate(80px,-150px) rotate(-7deg);
-
-    animation-delay:1.2s;
+.steam.s2{
+    left:90px;
+    animation-delay:1s;
 }
 
-
-@keyframes teaFloat{
-
+@keyframes steam{
     0%,100%{
         opacity:.1;
-        transform:
-            translateY(15px)
-            rotate(4deg);
+        transform:translateY(10px) rotate(5deg);
     }
 
     50%{
-        opacity:.45;
-        transform:
-            translateY(-35px)
-            rotate(-5deg);
+        opacity:.6;
+        transform:translateY(-15px) rotate(-7deg);
     }
-}
-
-
-.teaContent{
-    position:relative;
-    z-index:2;
-
-    max-width:700px;
-}
-
-
-.teaContent small{
-    text-transform:uppercase;
-
-    letter-spacing:6px;
-
-    color:#b9b1a5;
-
-    font-size:9px;
-}
-
-
-.teaContent h2{
-    margin-top:25px;
-
-    font-family:Georgia,serif;
-
-    font-weight:400;
-
-    font-size:
-        clamp(3rem,8vw,7rem);
-}
-
-
-.teaContent p{
-    margin:25px auto 0;
-
-    max-width:500px;
-
-    color:#99958e;
-
-    line-height:1.9;
 }
 
 
 /* =========================================================
-   WISHES
+   PHOTOS
 ========================================================= */
 
-.wishes{
-    min-height:100vh;
+.photo{
+    position:absolute;
 
-    padding:
-        150px 7vw;
+    z-index:30;
 
-    background:#f3eadc;
+    cursor:pointer;
 
-    color:#28242a;
-}
+    padding:8px 8px 30px;
 
+    background:#fff7e9;
 
-.wishesTop{
-    display:flex;
-
-    align-items:end;
-
-    justify-content:space-between;
-
-    gap:50px;
-}
-
-
-.wishes h2{
-    font-family:Georgia,serif;
-
-    font-weight:400;
-
-    font-size:
-        clamp(4rem,9vw,9rem);
-
-    line-height:.8;
-}
-
-
-.wishesTop p{
-    max-width:300px;
-
-    line-height:1.8;
-
-    color:#746b64;
-
-    font-size:12px;
-}
-
-
-.wishList{
-    max-width:900px;
-
-    margin:100px auto 0;
-}
-
-
-.wish{
-    display:grid;
-
-    grid-template-columns:70px 1fr auto;
-
-    gap:30px;
-
-    align-items:center;
-
-    padding:28px 0;
-
-    border-bottom:
-        1px solid #d8ccbc;
+    box-shadow:
+        0 14px 25px rgba(0,0,0,.25);
 
     transition:
-        padding .3s;
+        transform .35s,
+        box-shadow .35s;
 }
 
 
-.wish:hover{
-    padding-left:15px;
-    padding-right:15px;
+/*
+IMPORTANT:
+The image has NO fixed height.
+It uses width:auto / height:auto,
+so the whole original photo remains visible.
+*/
+
+.photo img{
+    display:block;
+
+    width:auto;
+    height:auto;
+
+    max-width:260px;
+    max-height:230px;
+
+    object-fit:contain;
+}
+
+.photo:hover{
+    transform:
+        translateY(-12px)
+        rotate(0deg)
+        scale(1.05);
+
+    box-shadow:
+        0 25px 45px rgba(0,0,0,.35);
+
+    z-index:80;
+}
+
+.photo .caption{
+    position:absolute;
+
+    left:0;
+    right:0;
+    bottom:7px;
+
+    text-align:center;
+
+    color:#40372f;
+
+    font-family:
+        "Comic Sans MS",
+        cursive;
+
+    font-size:13px;
 }
 
 
-.wish span{
-    color:#b0a296;
+/* photo positions */
 
-    font-size:10px;
+.photo1{
+    left:8%;
+    bottom:22%;
 
-    letter-spacing:2px;
+    transform:rotate(-8deg);
 }
 
+.photo2{
+    right:8%;
+    bottom:25%;
 
-.wish strong{
-    font-family:Georgia,serif;
-
-    font-size:30px;
-
-    font-weight:400;
+    transform:rotate(7deg);
 }
 
+.photo3{
+    left:30%;
+    bottom:4%;
 
-.wish em{
-    color:#c26770;
-
-    font-style:normal;
-
-    font-size:11px;
+    transform:rotate(-3deg);
 }
 
 
@@ -1153,348 +568,351 @@ a{
    LETTER
 ========================================================= */
 
-.letterSection{
-    min-height:100vh;
+.letter{
+    position:absolute;
 
-    padding:
-        150px 20px;
+    right:25%;
+    bottom:9%;
 
-    display:flex;
+    width:120px;
+    height:85px;
 
-    justify-content:center;
+    z-index:40;
 
-    align-items:center;
+    cursor:pointer;
 
-    background:
-        radial-gradient(
-            circle at 20% 20%,
-            #f3c6a1,
-            transparent 35%
-        ),
-        linear-gradient(
-            135deg,
-            #d6a7ad,
-            #d6c49d
-        );
+    transform:rotate(5deg);
+
+    transition:.3s;
+}
+
+.letter:hover{
+    transform:
+        rotate(0)
+        translateY(-10px)
+        scale(1.08);
 }
 
 
-.paper{
-    position:relative;
+/* envelope */
 
-    width:min(850px,95vw);
+.envelope{
+    position:absolute;
 
-    padding:
-        clamp(35px,7vw,85px);
+    inset:0;
 
-    background:
-        repeating-linear-gradient(
-            0deg,
-            #fff9ec 0 31px,
-            #f0e4ca 32px
-        );
+    background:#f2d29d;
 
-    color:#2e2824;
+    border-radius:5px;
 
     box-shadow:
-        0 40px 90px rgba(50,35,25,.35);
-
-    transform:rotate(-1deg);
+        0 12px 20px rgba(0,0,0,.25);
 }
 
-
-.paper::before{
+.envelope::before{
     content:"";
 
     position:absolute;
 
-    inset:15px;
+    inset:0;
 
-    border:
-        1px solid rgba(120,90,65,.15);
+    clip-path:
+        polygon(0 0,50% 55%,100% 0);
 
-    pointer-events:none;
+    background:#e5bc82;
+}
+
+.heart{
+    position:absolute;
+
+    left:50%;
+    top:48%;
+
+    transform:translate(-50%,-50%);
+
+    color:#c96f6d;
+
+    font-size:22px;
+
+    z-index:2;
 }
 
 
-.paperTop{
-    text-transform:uppercase;
+/* =========================================================
+   GIFT
+========================================================= */
 
-    letter-spacing:5px;
+.gift{
+    position:absolute;
 
-    color:#a1846c;
+    left:20%;
+    bottom:10%;
 
-    font-size:8px;
+    width:90px;
+    height:75px;
 
-    margin-bottom:30px;
+    z-index:35;
+
+    cursor:pointer;
+
+    transition:.3s;
 }
 
-
-.paper h2{
-    font-family:Georgia,serif;
-
-    font-weight:400;
-
-    font-size:
-        clamp(3rem,7vw,6rem);
-
-    margin-bottom:35px;
+.gift:hover{
+    transform:
+        translateY(-12px)
+        rotate(-5deg);
 }
 
+.giftBox{
+    position:absolute;
 
-.letterText{
-    font-family:
-        "Brush Script MT",
-        cursive;
+    bottom:0;
 
-    font-size:
-        clamp(19px,2.4vw,27px);
+    width:90px;
+    height:60px;
 
-    line-height:1.8;
+    background:#d87b78;
 
-    white-space:pre-line;
+    border-radius:5px;
+
+    box-shadow:
+        0 10px 20px rgba(0,0,0,.25);
 }
 
+.giftBox::before{
+    content:"";
 
-.signature{
-    margin-top:40px;
+    position:absolute;
 
-    text-align:right;
+    left:37px;
 
-    font-family:
-        "Brush Script MT",
-        cursive;
+    width:16px;
+    height:60px;
+
+    background:#f0c765;
+}
+
+.giftLid{
+    position:absolute;
+
+    top:3px;
+
+    width:98px;
+    height:18px;
+
+    left:-4px;
+
+    background:#e88b85;
+
+    border-radius:5px;
+
+    z-index:2;
+}
+
+.bow{
+    position:absolute;
+
+    left:31px;
+    top:-20px;
 
     font-size:30px;
 
-    color:#8c5f57;
+    z-index:5;
 }
 
 
 /* =========================================================
-   FINAL
+   SMALL STICKY NOTE
 ========================================================= */
 
-.final{
-    min-height:100vh;
-
-    position:relative;
-
-    display:flex;
-
-    align-items:center;
-
-    justify-content:center;
-
-    text-align:center;
-
-    overflow:hidden;
-
-    background:#101114;
-}
-
-
-.finalContent{
-    position:relative;
-
-    z-index:4;
-}
-
-
-.final small{
-    text-transform:uppercase;
-
-    letter-spacing:7px;
-
-    color:#777;
-
-    font-size:9px;
-}
-
-
-.final h2{
-    margin-top:30px;
-
-    font-family:Georgia,serif;
-
-    font-weight:400;
-
-    font-size:
-        clamp(5rem,15vw,13rem);
-
-    color:#f2d18a;
-}
-
-
-.final p{
-    margin-top:30px;
-
-    color:#999;
-
-    font-size:13px;
-
-    letter-spacing:2px;
-}
-
-
-/* =========================================================
-   CONFETTI
-========================================================= */
-
-.confetti{
+.note{
     position:absolute;
 
-    inset:0;
+    left:42%;
+    bottom:20%;
 
-    pointer-events:none;
+    z-index:25;
 
-    overflow:hidden;
-}
+    width:145px;
 
+    padding:17px;
 
-.confettiPiece{
-    position:absolute;
+    background:#f0cf71;
 
-    width:8px;
-    height:15px;
+    color:#393029;
 
-    opacity:0;
+    font-family:
+        "Comic Sans MS",
+        cursive;
 
-    animation:
-        confettiFall linear forwards;
-}
+    font-size:12px;
 
+    line-height:1.5;
 
-@keyframes confettiFall{
+    transform:rotate(-7deg);
 
-    0%{
-        opacity:1;
-
-        transform:
-            translateY(-20px)
-            rotate(0);
-    }
-
-    100%{
-        opacity:.8;
-
-        transform:
-            translateY(110vh)
-            rotate(720deg);
-    }
+    box-shadow:
+        0 10px 20px rgba(0,0,0,.2);
 }
 
 
 /* =========================================================
-   MODAL
+   POPUP SYSTEM
 ========================================================= */
 
-.modal{
+.overlay{
     position:fixed;
 
     inset:0;
 
-    z-index:10000;
+    z-index:500;
 
     display:none;
 
     align-items:center;
     justify-content:center;
 
-    padding:20px;
-
-    background:rgba(10,10,12,.8);
+    background:
+        rgba(15,20,18,.72);
 
     backdrop-filter:blur(12px);
+
+    padding:20px;
 }
 
-
-.modal.active{
+.overlay.active{
     display:flex;
 }
 
-
-.modalInner{
+.popup{
     position:relative;
 
-    max-width:850px;
+    width:min(650px,94vw);
 
-    width:95%;
+    max-height:88vh;
 
-    padding:20px;
+    overflow:auto;
 
-    background:#f4ecdf;
+    background:#fff1d8;
 
-    color:#28242a;
+    color:#342c27;
+
+    border-radius:22px;
+
+    padding:35px;
 
     box-shadow:
-        0 40px 100px rgba(0,0,0,.5);
+        0 35px 90px rgba(0,0,0,.45);
+
+    animation:
+        popupIn .35s cubic-bezier(.16,1,.3,1);
 }
 
+@keyframes popupIn{
+    from{
+        opacity:0;
+        transform:
+            scale(.8)
+            rotate(-3deg);
+    }
 
-.modalInner img{
-    display:block;
-
-    width:100%;
-
-    max-height:70vh;
-
-    object-fit:contain;
+    to{
+        opacity:1;
+        transform:
+            scale(1)
+            rotate(0);
+    }
 }
-
-
-.modalCaption{
-    text-align:center;
-
-    padding:20px;
-
-    font-family:
-        "Brush Script MT",
-        cursive;
-
-    font-size:25px;
-}
-
 
 .close{
     position:absolute;
 
-    z-index:3;
-
-    top:8px;
-    right:12px;
+    right:15px;
+    top:12px;
 
     border:0;
 
-    background:none;
+    background:#e8b2a5;
 
-    font-size:30px;
+    color:#fff;
+
+    width:32px;
+    height:32px;
+
+    border-radius:50%;
 
     cursor:pointer;
 
-    color:#222;
+    font-size:20px;
+}
+
+.popup h2{
+    font-size:30px;
+
+    margin-bottom:20px;
+}
+
+.popup p{
+    line-height:1.8;
+
+    white-space:pre-line;
+}
+
+.popupPhoto{
+    width:100%;
+    max-height:70vh;
+
+    object-fit:contain;
+
+    display:block;
+
+    margin:auto;
+
+    border-radius:12px;
 }
 
 
 /* =========================================================
-   SCROLL REVEALS
+   HIDDEN INTERACTION MESSAGE
 ========================================================= */
 
-.reveal{
+#toast{
+    position:fixed;
+
+    z-index:1000;
+
+    left:50%;
+    bottom:30px;
+
+    transform:
+        translate(-50%,30px);
+
     opacity:0;
 
-    transform:translateY(60px);
+    pointer-events:none;
 
-    transition:
-        opacity 1s ease,
-        transform 1s cubic-bezier(.16,1,.3,1);
+    background:#fff1d8;
+
+    color:#342c27;
+
+    padding:12px 18px;
+
+    border-radius:30px;
+
+    font-size:13px;
+
+    box-shadow:
+        0 10px 30px rgba(0,0,0,.25);
+
+    transition:.35s;
 }
 
-
-.reveal.visible{
+#toast.show{
     opacity:1;
 
-    transform:translateY(0);
+    transform:
+        translate(-50%,0);
 }
 
 
@@ -1502,915 +920,571 @@ a{
    MOBILE
 ========================================================= */
 
-@media(max-width:800px){
+@media(max-width:700px){
 
-    .intro{
-        grid-template-columns:1fr;
+    .nav button{
+        padding:8px;
 
-        padding-top:110px;
-        padding-bottom:110px;
-
-        gap:40px;
+        font-size:11px;
     }
 
-
-    .introRight{
-        min-height:430px;
-    }
-
-
-    .note{
-        width:230px;
-    }
-
-
-    .gallery{
-        padding-top:100px;
-    }
-
-
-    .galleryHeader{
-        display:block;
-    }
-
-
-    .galleryHeader p{
-        margin-top:25px;
-    }
-
-
-    .galleryGrid{
-        min-height:850px;
-    }
-
-
-    .memory{
-        width:210px;
-    }
-
-
-    .memory img{
-        height:180px;
-    }
-
-
-    .memory1{
-        left:0;
-        top:20px;
-    }
-
-
-    .memory2{
-        right:0;
-        top:200px;
-    }
-
-
-    .memory3{
-        left:15%;
-        top:430px;
-    }
-
-
-    .facts{
-        grid-template-columns:1fr 1fr;
-    }
-
-
-    .wishesTop{
-        display:block;
-    }
-
-
-    .wishesTop p{
-        margin-top:30px;
-    }
-
-
-    .wish{
-        grid-template-columns:40px 1fr;
-    }
-
-
-    .wish em{
+    .nav button:nth-child(2),
+    .nav button:nth-child(3){
         display:none;
     }
 
-}
-
-
-@media(max-width:500px){
-
-    .hero h1{
-        letter-spacing:-5px;
+    .photo img{
+        max-width:150px;
+        max-height:150px;
     }
 
-
-    .intro{
-        padding-left:25px;
-        padding-right:25px;
+    .photo1{
+        left:2%;
+        bottom:23%;
     }
 
+    .photo2{
+        right:2%;
+        bottom:25%;
+    }
+
+    .photo3{
+        left:27%;
+        bottom:4%;
+    }
+
+    .photo .caption{
+        font-size:9px;
+    }
+
+    .gift{
+        left:10%;
+        bottom:8%;
+        transform:scale(.75);
+    }
+
+    .letter{
+        right:8%;
+        bottom:8%;
+        transform:scale(.75);
+    }
 
     .note{
-        width:190px;
-        padding:25px;
+        display:none;
     }
 
-
-    .note p{
-        font-size:19px;
+    .tea{
+        transform:
+            translate(-50%,-50%)
+            scale(.8);
     }
 
-
-    .gallery{
-        padding-left:20px;
-        padding-right:20px;
-    }
-
-
-    .memory{
-        width:180px;
-    }
-
-
-    .memory img{
-        height:160px;
-    }
-
-
-    .memory2{
-        top:220px;
-    }
-
-
-    .memory3{
-        top:450px;
-    }
-
-
-    .facts{
-        grid-template-columns:1fr;
-    }
-
-
-    .wish strong{
-        font-size:23px;
-    }
-
-
-    .paper{
-        padding:35px 25px;
+    .title{
+        top:13%;
     }
 
 }
-
 </style>
 </head>
 
 
 <body>
 
+<div id="world">
 
-<div id="cursorGlow"></div>
-<div id="progressBar"></div>
+    <!-- =====================================================
+         TOP
+    ====================================================== -->
+
+    <div class="topbar">
+
+        <div class="logo">
+            mazonty.exe 🎂
+        </div>
+
+        <div class="nav">
+
+            <button onclick="showAbout()">
+                what is this?
+            </button>
+
+            <button onclick="makeConfetti()">
+                🎉 chaos
+            </button>
+
+            <button onclick="toast('yes, the tea is important. 🫖')">
+                🫖
+            </button>
+
+        </div>
+
+    </div>
 
 
-<div class="decor one"></div>
-<div class="decor two"></div>
-<div class="decor three"></div>
-<div class="decor four"></div>
+    <!-- =====================================================
+         TITLE
+    ====================================================== -->
 
+    <div class="title">
 
-<!-- =====================================================
-     HERO
-===================================================== -->
-
-<section class="hero">
-
-    <div class="heroContent">
-
-        <div class="kicker">
-            a slightly questionable birthday website
+        <div class="tiny">
+            august 18 · birthday edition
         </div>
 
         <h1>
-            1<span>8</span>
+            HAPPY 18TH
         </h1>
 
-        <div class="heroName">
-            Mazonty.
-        </div>
-
-        <p class="heroText">
-            Congratulations. You've officially reached the age
-            where apparently you're supposed to know what you're
-            doing. Good luck with that.
-        </p>
-
-    </div>
-
-    <div class="scrollHint">
-        keep scrolling ↓
-    </div>
-
-</section>
-
-
-<!-- =====================================================
-     INTRO
-===================================================== -->
-
-<section class="intro">
-
-    <div class="introLeft reveal">
-
-        <div class="stamp">
-            august 18
-        </div>
-
-        <h2>
-            so this is<br>
-            <em>awkward.</em>
-        </h2>
-
-        <p class="introText">
-            I could've made a completely normal birthday website.
-            You know, balloons, cake, “happy birthday,” blah blah.
-            But unfortunately you got me, so obviously this had
-            to become a whole thing.
-        </p>
-
-    </div>
-
-
-    <div class="introRight reveal">
-
-        <div class="note yellow">
-
-            <small>
-                reminder
-            </small>
-
-            <p>
-                You're 18 now.
-            </p>
-
-        </div>
-
-
-        <div class="note pink">
-
-            <small>
-                unfortunately
-            </small>
-
-            <p>
-                I still care about you.
-            </p>
-
-        </div>
-
-
-        <div class="note blue">
-
-            <small>
-                anyway
-            </small>
-
-            <p>
-                Happy birthday, idiot.
-            </p>
-
-        </div>
-
-    </div>
-
-</section>
-
-
-<!-- =====================================================
-     CHAPTER
-===================================================== -->
-
-<section class="chapter dark">
-
-    <div class="reveal">
-
-        <h2>
-            01
-        </h2>
-
         <p>
-            things worth remembering
-        </p>
-
-    </div>
-
-</section>
-
-
-<!-- =====================================================
-     PHOTOS
-===================================================== -->
-
-<section class="gallery">
-
-    <div class="galleryHeader reveal">
-
-        <div>
-
-            <span>
-                evidence
-            </span>
-
-            <h2>
-                Us.
-            </h2>
-
-        </div>
-
-        <p>
-            A small collection of moments that somehow
-            survived being photographed.
+            mazonty, unfortunately, this website is about you.
         </p>
 
     </div>
 
 
-    <div class="galleryGrid">
+    <!-- =====================================================
+         BALLOONS
+    ====================================================== -->
 
-        <!-- PHOTO 1 -->
+    <div
+        class="balloon a"
+        onclick="popBalloon(this)"
+    ></div>
 
-        <div
-            class="memory memory1 reveal"
-            onclick="openPhoto(1)"
-        >
+    <div
+        class="balloon b"
+        onclick="popBalloon(this)"
+    ></div>
 
-            <div class="tape"></div>
-
-            <img src="photo1.jpg">
-
-            <div class="memoryCaption">
-                where did this sweet baby boy go?
-            </div>
-
-        </div>
-
-
-        <!-- PHOTO 2 -->
-
-        <div
-            class="memory memory2 reveal"
-            onclick="openPhoto(2)"
-        >
-
-            <div class="tape"></div>
-
-            <img src="photo2.jpg">
-
-            <div class="memoryCaption">
-                the cutest femboy ever
-            </div>
-
-        </div>
+    <div
+        class="balloon c"
+        onclick="popBalloon(this)"
+    ></div>
 
 
-        <!-- PHOTO 3 -->
+    <!-- =====================================================
+         DESK
+    ====================================================== -->
 
-        <div
-            class="memory memory3 reveal"
-            onclick="openPhoto(3)"
-        >
-
-            <div class="tape"></div>
-
-            <img src="photo3.jpg">
-
-            <div class="memoryCaption">
-                we look so good<br>
-                (i look better ofc)<br>
-                My fav day btw
-            </div>
-
-        </div>
-
-    </div>
-
-</section>
+    <div class="desk"></div>
 
 
-<!-- =====================================================
-     CHAPTER 02
-===================================================== -->
+    <!-- =====================================================
+         TEA
+    ====================================================== -->
 
-<section class="chapter light">
+    <div
+        class="tea"
+        onclick="teaMessage()"
+        title="click the tea"
+    >
 
-    <div class="reveal">
+        <div class="steam s1"></div>
+        <div class="steam s2"></div>
 
-        <h2>
-            02
-        </h2>
+        <div class="handle"></div>
 
-        <p>
-            things you have to deal with now
-        </p>
-
-    </div>
-
-</section>
-
-
-<!-- =====================================================
-     DETAILS
-===================================================== -->
-
-<section class="details">
-
-    <div class="detailsHeader reveal">
-
-        <h2>
-            You're<br>
-            eighteen.
-        </h2>
-
-        <p>
-            Which means I am legally required to pretend
-            you're responsible now. I don't make the rules.
-        </p>
+        <div class="cup"></div>
 
     </div>
 
 
-    <div class="facts">
+    <!-- =====================================================
+         PHOTO 1
+    ====================================================== -->
 
-        <div class="fact reveal">
+    <div
+        class="photo photo1"
+        onclick="openPhoto('photo1.jpg','where did this sweet baby boy go?')"
+    >
 
-            <div class="factNumber">
-                01
-            </div>
+        <img src="photo1.jpg">
 
-            <h3>
-                Car license.
-            </h3>
-
-            <p>
-                You wanted it. You better get it.
-            </p>
-
-        </div>
-
-
-        <div class="fact reveal">
-
-            <div class="factNumber">
-                02
-            </div>
-
-            <h3>
-                100%.
-            </h3>
-
-            <p>
-                And obviously we're manifesting
-                the 100% in Qudurat.
-            </p>
-
-        </div>
-
-
-        <div class="fact reveal">
-
-            <div class="factNumber">
-                03
-            </div>
-
-            <h3>
-                Eighteen.
-            </h3>
-
-            <p>
-                Please use this newfound adulthood wisely.
-            </p>
-
-        </div>
-
-
-        <div class="fact reveal">
-
-            <div class="factNumber">
-                04
-            </div>
-
-            <h3>
-                Tea.
-            </h3>
-
-            <p>
-                Because apparently tea is important enough
-                to deserve its own mention.
-            </p>
-
+        <div class="caption">
+            where did this sweet baby boy go?
         </div>
 
     </div>
 
-</section>
 
+    <!-- =====================================================
+         PHOTO 2
+    ====================================================== -->
 
-<!-- =====================================================
-     TEA
-===================================================== -->
+    <div
+        class="photo photo2"
+        onclick="openPhoto('photo2.jpg','the cutest femboy ever')"
+    >
 
-<section class="teaSection">
+        <img src="photo2.jpg">
 
-    <div class="teaSteam one"></div>
-    <div class="teaSteam two"></div>
-
-    <div class="teaContent reveal">
-
-        <small>
-            one important detail
-        </small>
-
-        <h2>
-            Have some tea.
-        </h2>
-
-        <p>
-            Not because this website needed a random tea section.
-            Because you like tea, and apparently that's enough
-            reason to give it a place here.
-        </p>
-
-    </div>
-
-</section>
-
-
-<!-- =====================================================
-     CHAPTER 03
-===================================================== -->
-
-<section class="chapter dark">
-
-    <div class="reveal">
-
-        <h2>
-            03
-        </h2>
-
-        <p>
-            wishes, unfortunately
-        </p>
-
-    </div>
-
-</section>
-
-
-<!-- =====================================================
-     WISHES
-===================================================== -->
-
-<section class="wishes">
-
-    <div class="wishesTop reveal">
-
-        <h2>
-            I hope.
-        </h2>
-
-        <p>
-            Despite everything, there are actually quite a few
-            things I genuinely want for you this year.
-        </p>
-
-    </div>
-
-
-    <div class="wishList">
-
-        <div class="wish reveal">
-
-            <span>
-                01
-            </span>
-
-            <strong>
-                I hope 18 treats you well.
-            </strong>
-
-            <em>
-                seriously
-            </em>
-
-        </div>
-
-
-        <div class="wish reveal">
-
-            <span>
-                02
-            </span>
-
-            <strong>
-                I hope you get the car license you want.
-            </strong>
-
-            <em>
-                finally
-            </em>
-
-        </div>
-
-
-        <div class="wish reveal">
-
-            <span>
-                03
-            </span>
-
-            <strong>
-                I hope you get that 100% in Qudurat.
-            </strong>
-
-            <em>
-                obviously
-            </em>
-
-        </div>
-
-
-        <div class="wish reveal">
-
-            <span>
-                04
-            </span>
-
-            <strong>
-                I hope you get good things.
-            </strong>
-
-            <em>
-                you deserve them
-            </em>
-
-        </div>
-
-
-        <div class="wish reveal">
-
-            <span>
-                05
-            </span>
-
-            <strong>
-                I hope you have a really good year.
-            </strong>
-
-            <em>
-                don't ruin it
-            </em>
-
+        <div class="caption">
+            the cutest femboy ever
         </div>
 
     </div>
 
-</section>
 
+    <!-- =====================================================
+         PHOTO 3
+    ====================================================== -->
 
-<!-- =====================================================
-     LETTER
-===================================================== -->
+    <div
+        class="photo photo3"
+        onclick="openPhoto(
+            'photo3.jpg',
+            'we look so good (i look better ofc) My fav day btw'
+        )"
+    >
 
-<section class="letterSection">
+        <img src="photo3.jpg">
 
-    <div class="paper reveal">
-
-        <div class="paperTop">
-            august 18 · 2026
-        </div>
-
-        <h2>
-            hey mazonty.
-        </h2>
-
-        <div class="letterText">hey mazonty, so this is awkward but happy birthdayyy
-Ugh wtvrr. first of all, don't think i'm not mad at cuz i am but wtvr 
- anyways i love so much or wtvr and i miss you even more u r a decent person and you deserve decent things 
-i hope 18 treats u well and u get the car license u want (and ofc the 100% in qudurat) anyways i love you much baby</div>
-
-        <div class="signature">
-            — me, unfortunately
+        <div class="caption">
+            we look so good<br>
+            (i look better ofc)<br>
+            My fav day btw
         </div>
 
     </div>
 
-</section>
 
+    <!-- =====================================================
+         GIFT
+    ====================================================== -->
 
-<!-- =====================================================
-     FINAL
-===================================================== -->
+    <div
+        class="gift"
+        onclick="openGift()"
+        title="open me"
+    >
 
-<section class="final">
+        <div class="bow">
+            🎀
+        </div>
 
-    <div class="confetti" id="confetti"></div>
+        <div class="giftLid"></div>
 
-    <div class="finalContent reveal">
-
-        <small>
-            you've reached the end
-        </small>
-
-        <h2>
-            18.
-        </h2>
-
-        <p>
-            Happy birthday, Mazonty.
-        </p>
+        <div class="giftBox"></div>
 
     </div>
 
-</section>
+
+    <!-- =====================================================
+         LETTER
+    ====================================================== -->
+
+    <div
+        class="letter"
+        onclick="openLetter()"
+        title="open me"
+    >
+
+        <div class="envelope"></div>
+
+        <div class="heart">
+            ♥
+        </div>
+
+    </div>
 
 
-<!-- =====================================================
-     PHOTO MODAL
-===================================================== -->
+    <!-- =====================================================
+         NOTE
+    ====================================================== -->
 
-<div
-    class="modal"
-    id="photoModal"
-    onclick="closeModal(event)"
->
+    <div class="note">
 
-    <div class="modalInner">
+        IMPORTANT:
 
-        <button
-            class="close"
-            onclick="closeModal(event)"
-        >
-            ×
-        </button>
+        <br><br>
 
-        <img
-            id="modalImage"
-            src=""
-            alt=""
-        >
+        you're 18 now.
 
-        <div
-            class="modalCaption"
-            id="modalCaption"
-        ></div>
+        <br>
+
+        please act accordingly.
 
     </div>
 
 </div>
 
 
+<!-- =========================================================
+     POPUP
+========================================================= -->
+
+<div
+    class="overlay"
+    id="overlay"
+    onclick="outsideClose(event)"
+>
+
+    <div class="popup">
+
+        <button
+            class="close"
+            onclick="closePopup()"
+        >
+            ×
+        </button>
+
+        <div id="popupContent"></div>
+
+    </div>
+
+</div>
+
+
+<div id="toast"></div>
+
+
 <script>
 
 /* =========================================================
-   CURSOR
+   POPUP
 ========================================================= */
 
-const glow =
-    document.getElementById("cursorGlow");
+const overlay =
+    document.getElementById("overlay");
 
-document.addEventListener("mousemove",e=>{
-
-    glow.style.left =
-        e.clientX+"px";
-
-    glow.style.top =
-        e.clientY+"px";
-
-});
+const popupContent =
+    document.getElementById("popupContent");
 
 
-/* =========================================================
-   READING PROGRESS
-========================================================= */
+function openPopup(html){
 
-window.addEventListener("scroll",()=>{
+    popupContent.innerHTML = html;
 
-    const scrollTop =
-        window.scrollY;
-
-    const height =
-        document.documentElement.scrollHeight -
-        window.innerHeight;
-
-    const percentage =
-        (scrollTop / height) * 100;
-
-    document
-        .getElementById("progressBar")
-        .style.width =
-        percentage+"%";
-
-});
-
-
-/* =========================================================
-   SCROLL REVEALS
-========================================================= */
-
-const observer =
-    new IntersectionObserver(
-        entries=>{
-
-            entries.forEach(entry=>{
-
-                if(entry.isIntersecting){
-
-                    entry.target
-                        .classList
-                        .add("visible");
-
-                }
-
-            });
-
-        },
-        {
-            threshold:.15
-        }
-    );
-
-
-document
-    .querySelectorAll(".reveal")
-    .forEach(element=>{
-
-        observer.observe(element);
-
-    });
-
-
-/* =========================================================
-   PHOTO MODAL
-========================================================= */
-
-const captions = {
-
-    1:
-        "where did this sweet baby boy go?",
-
-    2:
-        "the cutest femboy ever",
-
-    3:
-        "we look so good (i look better ofc)<br>My fav day btw"
-
-};
-
-
-function openPhoto(number){
-
-    const modal =
-        document.getElementById("photoModal");
-
-    const image =
-        document.getElementById("modalImage");
-
-    const caption =
-        document.getElementById("modalCaption");
-
-
-    image.src =
-        "photo"+number+".jpg";
-
-    caption.innerHTML =
-        captions[number];
-
-    modal.classList.add("active");
-
-    document.body.style.overflow =
-        "hidden";
+    overlay.classList.add("active");
 
 }
 
 
-function closeModal(event){
+function closePopup(){
 
-    if(
-        event.target.id === "photoModal" ||
-        event.target.classList.contains("close")
-    ){
+    overlay.classList.remove("active");
 
-        document
-            .getElementById("photoModal")
-            .classList.remove("active");
+}
 
-        document.body.style.overflow =
-            "auto";
+
+function outsideClose(e){
+
+    if(e.target === overlay){
+
+        closePopup();
 
     }
+
+}
+
+
+/* =========================================================
+   ABOUT
+========================================================= */
+
+function showAbout(){
+
+    openPopup(`
+
+        <h2>
+            what is this 😭
+        </h2>
+
+        <p>
+            First of all, happy birthday.
+
+            <br><br>
+
+            Second of all, don't get too excited.
+
+            <br><br>
+
+            I made you an entire website because apparently
+            a normal "happy birthday" message wasn't enough.
+
+            <br><br>
+
+            There are things to click.
+
+            There are photos.
+
+            There's tea.
+
+            There's a letter.
+
+            There's unnecessary chaos.
+
+            <br><br>
+
+            Basically, explore.
+        </p>
+
+    `);
+
+}
+
+
+/* =========================================================
+   LETTER
+========================================================= */
+
+function openLetter(){
+
+    openPopup(`
+
+        <h2>
+            hey mazonty,
+        </h2>
+
+        <p>
+hey mazonty, so this is awkward but happy birthdayyy
+Ugh wtvrr. first of all, don't think i'm not mad at cuz i am but wtvr 
+ anyways i love so much or wtvr and i miss you even more u r a decent person and you deserve decent things 
+i hope 18 treats u well and u get the car license u want (and ofc the 100% in qudurat) anyways i love you much baby
+        </p>
+
+    `);
+
+}
+
+
+/* =========================================================
+   GIFT
+========================================================= */
+
+function openGift(){
+
+    makeConfetti();
+
+    openPopup(`
+
+        <h2>
+            you opened it 🎁
+        </h2>
+
+        <p>
+            Congratulations.
+
+            <br><br>
+
+            Your present is...
+
+            <br><br>
+
+            ✨ absolutely nothing ✨
+
+            <br><br>
+
+            Okay fine.
+
+            Your actual present is the fact that I spent
+            time making this ridiculous website.
+
+            <br><br>
+
+            Happy birthday, loser.
+        </p>
+
+    `);
+
+}
+
+
+/* =========================================================
+   TEA
+========================================================= */
+
+function teaMessage(){
+
+    toast(
+        "your tea has been successfully poured 🫖"
+    );
+
+}
+
+
+/* =========================================================
+   PHOTOS
+========================================================= */
+
+function openPhoto(image,caption){
+
+    openPopup(`
+
+        <img
+            class="popupPhoto"
+            src="${image}"
+            alt="birthday photo"
+        >
+
+        <br>
+
+        <p style="
+            text-align:center;
+            font-family:'Comic Sans MS',cursive;
+            font-size:18px;
+        ">
+            ${caption}
+        </p>
+
+    `);
+
+}
+
+
+/* =========================================================
+   TOAST
+========================================================= */
+
+let toastTimer;
+
+function toast(message){
+
+    const element =
+        document.getElementById("toast");
+
+    element.textContent =
+        message;
+
+    element.classList.add("show");
+
+    clearTimeout(toastTimer);
+
+    toastTimer =
+        setTimeout(()=>{
+
+            element.classList.remove("show");
+
+        },2200);
+
+}
+
+
+/* =========================================================
+   BALLOONS
+========================================================= */
+
+function popBalloon(balloon){
+
+    balloon.style.transition =
+        "transform .2s, opacity .2s";
+
+    balloon.style.transform =
+        "scale(1.7)";
+
+    balloon.style.opacity =
+        "0";
+
+    makeSmallConfetti(
+        balloon.getBoundingClientRect().left,
+        balloon.getBoundingClientRect().top
+    );
+
+    setTimeout(()=>{
+
+        balloon.remove();
+
+    },200);
 
 }
 
@@ -2419,52 +1493,163 @@ function closeModal(event){
    CONFETTI
 ========================================================= */
 
-const confetti =
-    document.getElementById("confetti");
+function makeSmallConfetti(x,y){
 
-
-const colors = [
-    "#e899a8",
-    "#e9bf62",
-    "#719bc2",
-    "#8ca87d",
-    "#f3eadc"
-];
-
-
-function makeConfetti(){
-
-    for(let i=0;i<90;i++){
+    for(let i=0;i<18;i++){
 
         const piece =
             document.createElement("div");
 
-        piece.className =
-            "confettiPiece";
+        piece.style.position =
+            "fixed";
 
         piece.style.left =
-            Math.random()*100+"%";
+            x+"px";
 
         piece.style.top =
-            -(Math.random()*40)+"px";
+            y+"px";
+
+        piece.style.width =
+            "7px";
+
+        piece.style.height =
+            "11px";
+
+        piece.style.zIndex =
+            "1000";
+
+        piece.style.pointerEvents =
+            "none";
 
         piece.style.background =
-            colors[
+            [
+                "#e89191",
+                "#e8bf69",
+                "#82a9c4",
+                "#fff1d8"
+            ][
                 Math.floor(
-                    Math.random()*colors.length
+                    Math.random()*4
                 )
             ];
 
-        piece.style.transform =
-            `rotate(${Math.random()*360}deg)`;
+        document.body.appendChild(piece);
 
-        piece.style.animationDuration =
-            (3+Math.random()*4)+"s";
+        const angle =
+            Math.random()*Math.PI*2;
 
-        piece.style.animationDelay =
-            Math.random()*2+"s";
+        const distance =
+            40+Math.random()*100;
 
-        confetti.appendChild(piece);
+        const endX =
+            Math.cos(angle)*distance;
+
+        const endY =
+            Math.sin(angle)*distance+100;
+
+        piece.animate(
+
+            [
+                {
+                    transform:"translate(0,0) rotate(0)",
+                    opacity:1
+                },
+                {
+                    transform:
+                        `translate(${endX}px,${endY}px)
+                         rotate(500deg)`,
+
+                    opacity:0
+                }
+            ],
+
+            {
+                duration:
+                    700+Math.random()*500,
+
+                easing:"cubic-bezier(.2,.8,.3,1)"
+            }
+
+        ).onfinish=()=>piece.remove();
+
+    }
+
+}
+
+
+function makeConfetti(){
+
+    for(let i=0;i<80;i++){
+
+        const piece =
+            document.createElement("div");
+
+        piece.style.position =
+            "fixed";
+
+        piece.style.left =
+            Math.random()*100+"vw";
+
+        piece.style.top =
+            "-20px";
+
+        piece.style.width =
+            "8px";
+
+        piece.style.height =
+            "13px";
+
+        piece.style.zIndex =
+            "900";
+
+        piece.style.pointerEvents =
+            "none";
+
+        piece.style.background =
+            [
+                "#e89191",
+                "#e8bf69",
+                "#82a9c4",
+                "#8eaa83",
+                "#fff1d8"
+            ][
+                Math.floor(
+                    Math.random()*5
+                )
+            ];
+
+        document.body.appendChild(piece);
+
+        const rotation =
+            Math.random()*900-450;
+
+        piece.animate(
+
+            [
+                {
+                    transform:
+                        `translateY(0) rotate(0deg)`,
+                    opacity:1
+                },
+                {
+                    transform:
+                        `translateY(110vh)
+                         rotate(${rotation}deg)`,
+                    opacity:.7
+                }
+            ],
+
+            {
+                duration:
+                    2500+Math.random()*3000,
+
+                delay:
+                    Math.random()*800,
+
+                easing:"linear"
+            }
+
+        ).onfinish=()=>piece.remove();
 
     }
 
@@ -2472,59 +1657,21 @@ function makeConfetti(){
 
 
 /* =========================================================
-   START CONFETTI WHEN FINAL ENTERS VIEW
+   KEYBOARD ESCAPE
 ========================================================= */
 
-const finalSection =
-    document.querySelector(".final");
+document.addEventListener(
+    "keydown",
+    event=>{
 
+        if(event.key === "Escape"){
 
-const finalObserver =
-    new IntersectionObserver(
-        entries=>{
+            closePopup();
 
-            entries.forEach(entry=>{
-
-                if(entry.isIntersecting){
-
-                    if(!confetti.children.length){
-
-                        makeConfetti();
-
-                    }
-
-                }
-
-            });
-
-        },
-        {
-            threshold:.35
         }
-    );
-
-
-finalObserver.observe(finalSection);
-
-
-/* =========================================================
-   ESCAPE MODAL
-========================================================= */
-
-document.addEventListener("keydown",e=>{
-
-    if(e.key==="Escape"){
-
-        document
-            .getElementById("photoModal")
-            .classList.remove("active");
-
-        document.body.style.overflow =
-            "auto";
 
     }
-
-});
+);
 
 </script>
 
