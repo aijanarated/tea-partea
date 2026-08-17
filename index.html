@@ -3,883 +3,781 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Tea Between Us</title>
+
+<title>For Mazonty</title>
 
 <style>
-@import url('https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Kalam:wght@400;700&family=Amatic+SC:wght@400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Inter:wght@300;400;500;600&family=Kalam:wght@400;700&display=swap');
 
-:root{
-    --tea:#7b3f1d;
-    --tea-light:#b86d36;
-    --cream:#f4e4c4;
-    --paper:#ead4a8;
-    --brown:#3a2115;
-    --dark:#21120c;
-    --gold:#c79a5a;
-    --muted:#8d6847;
+:root {
+    --bg: #0b0908;
+    --bg2: #15100d;
+    --warm: #a86435;
+    --warm2: #d29a62;
+    --cream: #f1e4cf;
+    --muted: #9c8b79;
+    --paper: #efe0c2;
+    --ink: #302015;
 }
 
-*{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
 
-html{
-    scroll-behavior:smooth;
+html {
+    scroll-behavior: smooth;
 }
 
-body{
-    background:var(--dark);
-    color:var(--cream);
-    font-family:"Kalam",cursive;
-    overflow-x:hidden;
+body {
+    background: var(--bg);
+    color: var(--cream);
+    font-family: Inter, sans-serif;
+    overflow-x: hidden;
 }
 
-/* =====================================================
-   GENERAL
-===================================================== */
-
-section{
-    min-height:100vh;
-    position:relative;
-    overflow:hidden;
+button {
+    font-family: inherit;
 }
 
-button{
-    font-family:inherit;
+section {
+    min-height: 100vh;
+    position: relative;
 }
 
-.no-select{
-    user-select:none;
-}
-
-/* =====================================================
-   GRAIN / ATMOSPHERE
-===================================================== */
-
-body::before{
-    content:"";
-    position:fixed;
-    inset:0;
-    pointer-events:none;
-    z-index:1000;
-    opacity:.07;
-    background-image:
-        repeating-linear-gradient(
-            0deg,
-            transparent 0px,
-            rgba(255,255,255,.5) 1px,
-            transparent 2px
-        );
-}
-
-/* =====================================================
+/* =========================================================
    OPENING
-===================================================== */
+========================================================= */
 
-#opening{
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    text-align:center;
-
+#opening {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
     background:
         radial-gradient(
-            ellipse at 50% 35%,
-            rgba(180,105,49,.35),
-            transparent 45%
+            circle at 50% 60%,
+            rgba(170, 95, 43, .18),
+            transparent 35%
         ),
-        linear-gradient(
-            135deg,
-            #24120b,
-            #432316 50%,
-            #1d0e09
-        );
+        linear-gradient(145deg, #0b0908, #1b120d);
 }
 
-.opening-lamp{
-    position:absolute;
-    top:-40px;
-    left:50%;
-    transform:translateX(-50%);
-    width:260px;
-    height:170px;
-    background:#9b683c;
-    border-radius:0 0 50% 50%;
-    box-shadow:
-        0 20px 100px rgba(225,154,79,.45),
-        0 0 200px rgba(225,154,79,.18);
-    opacity:.6;
+.opening-content {
+    width: min(850px, 90vw);
 }
 
-.opening-lamp::after{
-    content:"";
-    position:absolute;
-    bottom:-100px;
-    left:-120px;
-    width:500px;
-    height:250px;
-    background:radial-gradient(
-        ellipse,
-        rgba(230,166,89,.16),
-        transparent 70%
-    );
+.mini {
+    text-transform: uppercase;
+    letter-spacing: 6px;
+    font-size: .68rem;
+    color: var(--muted);
 }
 
-.opening-content{
-    position:relative;
-    z-index:10;
-    width:min(850px,92vw);
-    padding:40px 20px;
+.opening-content h1 {
+    font-family: "DM Serif Display", serif;
+    font-size: clamp(4rem, 12vw, 8rem);
+    font-weight: 400;
+    line-height: .88;
+    margin: 25px 0;
 }
 
-.eyebrow{
-    font-family:"Amatic SC",cursive;
-    font-size:2rem;
-    letter-spacing:7px;
-    color:#d9b77e;
+.opening-content p {
+    max-width: 530px;
+    margin: auto;
+    color: var(--muted);
+    line-height: 1.8;
 }
 
-.opening-content h1{
-    font-family:"DM Serif Display",serif;
-    font-size:clamp(4rem,13vw,9rem);
-    line-height:.78;
-    margin:25px 0;
-    text-shadow:5px 7px 0 #130a06;
+.start {
+    margin-top: 40px;
+    padding: 14px 36px;
+    border: 1px solid rgba(241, 228, 207, .3);
+    color: var(--cream);
+    background: transparent;
+    cursor: pointer;
+    transition: .3s;
 }
 
-.opening-content h1 span{
-    color:#c88749;
+.start:hover {
+    background: var(--cream);
+    color: var(--bg);
 }
 
-.opening-content p{
-    max-width:650px;
-    margin:30px auto;
-    font-size:1.35rem;
-    line-height:1.8;
-    color:#e9d8bd;
-}
+/* =========================================================
+   TEA ROOM
+========================================================= */
 
-.begin{
-    margin-top:20px;
-    padding:16px 40px;
-    border:1px solid #c99a5c;
-    background:#c99a5c;
-    color:#29150c;
-    font-size:1.25rem;
-    cursor:pointer;
-    transition:.3s;
-}
-
-.begin:hover{
-    background:transparent;
-    color:#f5dfbd;
-    transform:translateY(-4px);
-}
-
-/* =====================================================
-   FLOATING DUST
-===================================================== */
-
-.dust{
-    position:absolute;
-    width:4px;
-    height:4px;
-    background:#e6c895;
-    border-radius:50%;
-    opacity:.35;
-    animation:dustFloat linear infinite;
-}
-
-@keyframes dustFloat{
-    from{
-        transform:translateY(100vh);
-        opacity:0;
-    }
-
-    20%{
-        opacity:.4;
-    }
-
-    80%{
-        opacity:.35;
-    }
-
-    to{
-        transform:translateY(-20vh);
-        opacity:0;
-    }
-}
-
-/* =====================================================
-   TEA TABLE SECTION
-===================================================== */
-
-#teaRoom{
-    display:flex;
-    align-items:center;
-    justify-content:center;
+#teaRoom {
     background:
         radial-gradient(
             ellipse at 50% 55%,
-            rgba(188,109,51,.35),
-            transparent 40%
+            rgba(171, 99, 49, .24),
+            transparent 38%
         ),
-        #50301e;
+        linear-gradient(#18110d, #090807);
+    overflow: hidden;
 }
 
-.room-title{
-    position:absolute;
-    top:55px;
-    left:50%;
-    transform:translateX(-50%);
-    text-align:center;
-    z-index:10;
+.room-label {
+    position: absolute;
+    top: 55px;
+    left: 55px;
+    z-index: 10;
 }
 
-.room-title h2{
-    font-family:"DM Serif Display",serif;
-    font-size:clamp(3rem,8vw,6rem);
+.room-label span {
+    display: block;
+    text-transform: uppercase;
+    letter-spacing: 4px;
+    font-size: .65rem;
+    color: var(--muted);
+    margin-bottom: 10px;
 }
 
-.room-title p{
-    font-size:1.15rem;
-    opacity:.75;
+.room-label h2 {
+    font-family: "DM Serif Display", serif;
+    font-size: 2.6rem;
+    font-weight: 400;
 }
 
-/* WALL */
+.wall-light {
+    position: absolute;
+    width: 500px;
+    height: 500px;
+    left: 50%;
+    top: 15%;
+    transform: translateX(-50%);
+    background: rgba(190, 117, 59, .08);
+    filter: blur(90px);
+}
 
-.wall{
-    position:absolute;
-    inset:0;
+.table {
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    height: 35%;
     background:
         repeating-linear-gradient(
             90deg,
-            rgba(255,255,255,.025) 0,
-            rgba(255,255,255,.025) 2px,
-            transparent 2px,
-            transparent 70px
+            #3b2418 0,
+            #3b2418 42px,
+            #342016 43px,
+            #342016 84px
         );
+    box-shadow: 0 -25px 50px rgba(0,0,0,.4);
 }
 
-/* TABLE */
+.table-top {
+    position: absolute;
+    top: 0;
+    width: 100%;
+    height: 8px;
+    background: #24140d;
+}
 
-.table{
-    position:absolute;
-    bottom:0;
-    left:0;
-    width:100%;
-    height:38%;
+/* =========================================================
+   TEAPOT
+========================================================= */
+
+.teapot {
+    position: absolute;
+    z-index: 20;
+    left: 27%;
+    bottom: 23%;
+    width: 230px;
+    height: 190px;
+    cursor: pointer;
+    transition: transform .5s ease;
+}
+
+.pot {
+    position: absolute;
+    left: 32px;
+    bottom: 20px;
+    width: 150px;
+    height: 115px;
+    border-radius: 48%;
     background:
-        repeating-linear-gradient(
-            90deg,
-            #714323 0,
-            #714323 25px,
-            #61381f 26px,
-            #61381f 52px
+        radial-gradient(
+            circle at 35% 25%,
+            #a96538,
+            #703d22 55%,
+            #442216
         );
-    box-shadow:0 -15px 40px rgba(0,0,0,.3);
+    box-shadow:
+        inset 10px 10px 20px rgba(255,255,255,.08),
+        12px 15px 25px rgba(0,0,0,.4);
 }
 
-.table::before{
-    content:"";
-    position:absolute;
-    top:0;
-    left:0;
-    width:100%;
-    height:15px;
-    background:#432414;
+.lid {
+    position: absolute;
+    top: 16px;
+    left: 53px;
+    width: 110px;
+    height: 28px;
+    border-radius: 50%;
+    background: #814a29;
 }
 
-/* TEA GLASS */
-
-.tea-holder{
-    position:absolute;
-    z-index:15;
-    left:50%;
-    bottom:20%;
-    transform:translateX(-50%);
-    width:230px;
-    height:330px;
-    cursor:pointer;
-    transition:.3s;
+.lid::after {
+    content: "";
+    position: absolute;
+    left: 43px;
+    top: -13px;
+    width: 25px;
+    height: 16px;
+    border-radius: 50%;
+    background: #965a31;
 }
 
-.tea-holder:hover{
-    transform:translateX(-50%) translateY(-7px);
+.handle {
+    position: absolute;
+    right: 0;
+    top: 47px;
+    width: 75px;
+    height: 82px;
+    border: 14px solid #5a2e19;
+    border-left: 0;
+    border-radius: 0 50% 50% 0;
 }
 
-.saucer{
-    position:absolute;
-    bottom:5px;
-    left:5px;
-    width:220px;
-    height:42px;
-    background:#d0b187;
-    border:5px solid #6e4b30;
-    border-radius:50%;
-    box-shadow:0 10px 15px rgba(0,0,0,.25);
+.spout {
+    position: absolute;
+    left: -48px;
+    top: 62px;
+    width: 78px;
+    height: 36px;
+    background: #64331c;
+    transform: rotate(-22deg);
+    clip-path: polygon(
+        100% 20%,
+        100% 80%,
+        0 100%,
+        22% 50%,
+        0 0
+    );
 }
 
-.glass{
-    position:absolute;
-    left:31px;
-    bottom:32px;
-    width:168px;
-    height:245px;
-    clip-path:polygon(
-        4% 0,
-        96% 0,
+/* =========================================================
+   GLASS
+========================================================= */
+
+.glass-area {
+    position: absolute;
+    z-index: 18;
+    left: 58%;
+    bottom: 18%;
+    width: 130px;
+    height: 190px;
+}
+
+.glass {
+    position: absolute;
+    left: 10px;
+    bottom: 20px;
+    width: 108px;
+    height: 150px;
+    clip-path: polygon(
+        5% 0,
+        95% 0,
         82% 100%,
         18% 100%
     );
-    border-left:5px solid rgba(255,255,255,.55);
-    border-right:5px solid rgba(255,255,255,.55);
-    border-bottom:5px solid rgba(255,255,255,.55);
-    background:rgba(255,255,255,.08);
-    overflow:hidden;
+    border-left: 3px solid rgba(255,255,255,.4);
+    border-right: 3px solid rgba(255,255,255,.4);
+    border-bottom: 3px solid rgba(255,255,255,.4);
+    background: rgba(255,255,255,.025);
+    overflow: hidden;
 }
 
-.tea{
-    position:absolute;
-    left:0;
-    bottom:0;
-    width:100%;
-    height:78%;
-    background:
-        linear-gradient(
-            90deg,
-            #6b2e12,
-            #a75420 45%,
-            #713013
-        );
-    transition:height 1s ease;
-}
-
-.tea-surface{
-    position:absolute;
-    top:-8px;
-    left:2%;
-    width:96%;
-    height:25px;
-    border-radius:50%;
-    background:#934419;
-    border:3px solid rgba(255,255,255,.3);
-}
-
-.glass-highlight{
-    position:absolute;
-    top:20px;
-    left:25px;
-    width:15px;
-    height:180px;
-    border-radius:50%;
-    background:rgba(255,255,255,.2);
-}
-
-/* STEAM */
-
-.steam{
-    position:absolute;
-    bottom:280px;
-    width:35px;
-    height:130px;
-    border-left:4px solid rgba(255,255,255,.22);
-    border-radius:50%;
-    filter:blur(2px);
-    animation:steam 4s infinite ease-in-out;
-}
-
-.steam1{
-    left:75px;
-}
-
-.steam2{
-    left:105px;
-    animation-delay:1s;
-}
-
-.steam3{
-    left:140px;
-    animation-delay:2s;
-}
-
-@keyframes steam{
-    0%{
-        transform:translateY(25px) rotate(5deg);
-        opacity:0;
-    }
-
-    40%{
-        opacity:.7;
-    }
-
-    100%{
-        transform:translateY(-80px) rotate(-8deg);
-        opacity:0;
-    }
-}
-
-/* SUGAR */
-
-.sugar-box{
-    position:absolute;
-    z-index:12;
-    left:12%;
-    bottom:14%;
-    width:125px;
-    height:85px;
-    background:#e8d2a8;
-    border:5px solid #5a351e;
-    transform:rotate(-4deg);
-    box-shadow:8px 8px 10px rgba(0,0,0,.2);
-}
-
-.sugar-box::before{
-    content:"SUGAR";
-    position:absolute;
-    top:24px;
-    left:27px;
-    font-family:"Amatic SC",cursive;
-    font-size:1.8rem;
-    color:#5a351e;
-}
-
-.sugar-box::after{
-    content:"";
-    position:absolute;
-    top:-12px;
-    left:5px;
-    width:105px;
-    height:18px;
-    background:#c4a274;
-    border:4px solid #5a351e;
-}
-
-/* SPOON */
-
-.big-spoon{
-    position:absolute;
-    z-index:12;
-    right:13%;
-    bottom:14%;
-    width:14px;
-    height:190px;
-    background:linear-gradient(
+.liquid {
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    height: 0;
+    background: linear-gradient(
         90deg,
-        #806e59,
-        #e5d5bc,
-        #8c785f
+        #60260f,
+        #9a4318,
+        #6c2b10
     );
-    border-radius:20px;
-    transform:rotate(32deg);
+    transition: height 1.7s ease;
 }
 
-.big-spoon::before{
-    content:"";
-    position:absolute;
-    top:-48px;
-    left:-15px;
-    width:44px;
-    height:65px;
-    border-radius:50%;
-    background:#d2c0a5;
+.surface {
+    position: absolute;
+    left: 2%;
+    top: -6px;
+    width: 96%;
+    height: 14px;
+    border-radius: 50%;
+    background: #873711;
 }
 
-/* =====================================================
-   TEA MESSAGE
-===================================================== */
-
-.tea-instruction{
-    position:absolute;
-    z-index:20;
-    bottom:7%;
-    left:50%;
-    transform:translateX(-50%);
-    text-align:center;
-    width:90%;
+.shine {
+    position: absolute;
+    top: 15px;
+    left: 20px;
+    width: 7px;
+    height: 105px;
+    border-radius: 50%;
+    background: rgba(255,255,255,.18);
 }
 
-.tea-instruction h3{
-    font-family:"Amatic SC",cursive;
-    font-size:2.5rem;
+.saucer {
+    position: absolute;
+    bottom: 4px;
+    left: 0;
+    width: 130px;
+    height: 25px;
+    border-radius: 50%;
+    background: #b9a07a;
 }
 
-.tea-instruction p{
-    opacity:.7;
+.stream {
+    position: absolute;
+    z-index: 30;
+    left: 50%;
+    top: 100%;
+    width: 8px;
+    height: 0;
+    background: #934117;
+    border-radius: 10px;
+    opacity: 0;
 }
 
-#teaStatus{
-    margin-top:12px;
-    color:#e0b779;
-    font-size:1.2rem;
+.stream.active {
+    opacity: 1;
+    height: 170px;
+    animation: pouring .3s infinite alternate;
 }
 
-/* =====================================================
-   TROPE
-===================================================== */
-
-#trope{
-    background:
-        linear-gradient(
-            rgba(235,214,177,.97),
-            rgba(235,214,177,.97)
-        );
-    color:#392216;
-    display:flex;
-    justify-content:center;
-    align-items:center;
+@keyframes pouring {
+    from { transform: translateX(-50%) scaleX(.8); }
+    to { transform: translateX(-50%) scaleX(1.15); }
 }
 
-.paper{
-    position:relative;
-    width:min(850px,92vw);
-    padding:70px 60px;
-    background:
-        linear-gradient(
-            rgba(247,232,201,.97),
-            rgba(231,207,164,.97)
-        );
-    box-shadow:
-        0 25px 60px rgba(0,0,0,.35);
-    transform:rotate(-1deg);
+/* =========================================================
+   STEAM
+========================================================= */
+
+.steam {
+    position: absolute;
+    width: 25px;
+    height: 100px;
+    bottom: 180px;
+    border-left: 3px solid rgba(255,255,255,.2);
+    border-radius: 50%;
+    opacity: 0;
+    filter: blur(2px);
 }
 
-.paper::before{
-    content:"";
-    position:absolute;
-    inset:15px;
-    border:1px solid rgba(70,38,20,.18);
-    pointer-events:none;
+.steam.show {
+    opacity: 1;
+    animation: steam 3s infinite ease-in-out;
 }
 
-.paper-stain{
-    position:absolute;
-    width:130px;
-    height:130px;
-    border:7px solid rgba(104,57,28,.12);
-    border-radius:50%;
-    right:40px;
-    top:30px;
+.steam.one { left: 35px; }
+.steam.two { left: 60px; animation-delay: 1s; }
+.steam.three { left: 82px; animation-delay: 1.7s; }
+
+@keyframes steam {
+    0% {
+        transform: translateY(15px) rotate(5deg);
+        opacity: 0;
+    }
+
+    35% {
+        opacity: .5;
+    }
+
+    100% {
+        transform: translateY(-80px) rotate(-8deg);
+        opacity: 0;
+    }
 }
 
-.paper h2{
-    font-family:"DM Serif Display",serif;
-    font-size:clamp(3rem,8vw,5rem);
-    text-align:center;
-    margin-bottom:35px;
+.tea-help {
+    position: absolute;
+    z-index: 30;
+    bottom: 6%;
+    left: 50%;
+    transform: translateX(-50%);
+    text-align: center;
+    width: 90%;
+    color: var(--muted);
+    font-size: .9rem;
 }
 
-.paper-text{
-    font-size:1.35rem;
-    line-height:1.9;
-    text-align:center;
+#teaStatus {
+    color: var(--warm2);
+    margin-top: 8px;
 }
 
-.paper-text em{
-    display:block;
-    margin-top:25px;
-    font-size:1.1rem;
-    opacity:.7;
-}
+/* =========================================================
+   EARN SECTION
+========================================================= */
 
-.continue{
-    display:block;
-    margin:40px auto 0;
-    padding:13px 35px;
-    border:2px solid #4b2a19;
-    background:#4b2a19;
-    color:#f4e4c4;
-    font-size:1.1rem;
-    cursor:pointer;
-    transition:.25s;
-}
-
-.continue:hover{
-    background:transparent;
-    color:#4b2a19;
-}
-
-/* =====================================================
-   PHOTO GALLERY
-===================================================== */
-
-#memories{
+#earn {
+    min-height: 100vh;
     background:
         radial-gradient(
-            circle at 50% 50%,
-            #85502f,
-            #432718
+            circle at center,
+            #3b261b,
+            #0b0908
         );
-    padding:90px 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 40px 20px;
 }
 
-.gallery{
-    width:min(1100px,94vw);
-    margin:auto;
-    text-align:center;
+.earn-box {
+    width: min(800px, 92vw);
 }
 
-.gallery h2{
-    font-family:"DM Serif Display",serif;
-    font-size:clamp(3.5rem,8vw,6rem);
+.earn-label {
+    color: var(--muted);
+    text-transform: uppercase;
+    letter-spacing: 5px;
+    font-size: .68rem;
 }
 
-.gallery-subtitle{
-    font-size:1.2rem;
-    opacity:.7;
-    margin-top:10px;
+.earn-box h2 {
+    font-family: "DM Serif Display", serif;
+    font-size: clamp(3.5rem, 10vw, 7rem);
+    font-weight: 400;
+    line-height: .9;
+    margin: 25px 0;
 }
 
-.photos{
-    display:grid;
-    grid-template-columns:repeat(3,1fr);
-    gap:35px;
-    margin-top:60px;
+.earn-box p {
+    max-width: 550px;
+    margin: auto;
+    color: var(--muted);
+    line-height: 1.8;
 }
 
-.photo{
-    background:#f1dfbd;
-    padding:14px 14px 45px;
-    box-shadow:0 18px 30px rgba(0,0,0,.35);
-    color:#3d2417;
-    transition:.35s;
+.task {
+    margin: 45px auto 0;
+    width: min(550px, 90vw);
+    padding: 25px;
+    border: 1px solid var(--line);
+    background: rgba(255,255,255,.025);
 }
 
-.photo:nth-child(1){
-    transform:rotate(-5deg);
+.task-number {
+    color: var(--warm2);
+    font-size: .8rem;
+    letter-spacing: 3px;
+    text-transform: uppercase;
 }
 
-.photo:nth-child(2){
-    transform:rotate(3deg);
+.task h3 {
+    margin: 12px 0;
+    font-size: 1.25rem;
+    font-weight: 400;
 }
 
-.photo:nth-child(3){
-    transform:rotate(-2deg);
+.earn-button {
+    margin-top: 20px;
+    padding: 13px 30px;
+    border: 1px solid rgba(238,224,201,.3);
+    background: transparent;
+    color: var(--cream);
+    cursor: pointer;
+    transition: .3s;
 }
 
-.photo:hover{
-    transform:rotate(0) translateY(-15px) scale(1.03);
+.earn-button:hover {
+    background: var(--cream);
+    color: var(--bg);
 }
 
-.photo img{
-    width:100%;
-    height:300px;
-    object-fit:cover;
-    background:#c7a779;
+.progress {
+    margin-top: 25px;
+    height: 3px;
+    background: rgba(255,255,255,.1);
 }
 
-.photo-caption{
-    margin-top:14px;
-    font-size:1.2rem;
+.progress-bar {
+    width: 0%;
+    height: 100%;
+    background: var(--warm2);
+    transition: .5s;
 }
 
-/* =====================================================
-   YOUR MESSAGE
-===================================================== */
+/* =========================================================
+   PHOTOS
+========================================================= */
 
-#letter{
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    background:#e9d4a8;
-    color:#392216;
+#photos {
+    padding: 100px 20px;
+    background: #11100e;
 }
 
-.letter{
-    width:min(900px,94vw);
-    padding:70px 60px;
+.photos-wrap {
+    width: min(1100px, 94vw);
+    margin: auto;
+}
+
+.photos-title {
+    text-align: center;
+}
+
+.photos-title h2 {
+    font-family: "DM Serif Display", serif;
+    font-size: clamp(3rem, 8vw, 6rem);
+    font-weight: 400;
+}
+
+.photos-title p {
+    color: var(--muted);
+    margin-top: 10px;
+}
+
+.photo-grid {
+    display: grid;
+    grid-template-columns: 1.1fr .9fr 1fr;
+    gap: 28px;
+    margin-top: 60px;
+}
+
+.photo-card {
+    background: var(--paper);
+    color: var(--ink);
+    padding: 10px 10px 35px;
+    box-shadow: 0 20px 40px rgba(0,0,0,.4);
+    transition: .35s;
+}
+
+.photo-card:nth-child(1) {
+    transform: rotate(-3deg);
+    margin-top: 25px;
+}
+
+.photo-card:nth-child(2) {
+    transform: rotate(2deg);
+}
+
+.photo-card:nth-child(3) {
+    transform: rotate(-2deg);
+    margin-top: 45px;
+}
+
+.photo-card:hover {
+    transform: rotate(0) translateY(-12px) scale(1.03);
+}
+
+.photo-card img {
+    display: block;
+    width: 100%;
+    height: 330px;
+    object-fit: cover;
+    background: #705038;
+}
+
+.photo-card:nth-child(2) img {
+    height: 270px;
+}
+
+.caption {
+    text-align: center;
+    font-family: Kalam, cursive;
+    font-size: 1.2rem;
+    margin-top: 14px;
+}
+
+/* =========================================================
+   LETTER
+========================================================= */
+
+#letter {
+    min-height: 100vh;
+    padding: 90px 20px;
+    background: #e6d1a6;
+    color: var(--ink);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.letter-paper {
+    width: min(900px, 94vw);
+    padding: 70px 60px;
+    min-height: 600px;
+    position: relative;
     background:
         repeating-linear-gradient(
             0deg,
-            #f3dfb6 0,
-            #f3dfb6 31px,
-            #ecd3a5 32px
+            #f3e1bb 0,
+            #f3e1bb 34px,
+            #ecd7ad 35px
         );
-    box-shadow:0 25px 60px rgba(0,0,0,.35);
-    position:relative;
+    box-shadow: 0 25px 70px rgba(0,0,0,.3);
 }
 
-.letter::after{
-    content:"";
-    position:absolute;
-    width:130px;
-    height:130px;
-    border:8px solid rgba(96,53,27,.1);
-    border-radius:50%;
-    bottom:35px;
-    right:35px;
+.letter-paper h2 {
+    text-align: center;
+    font-family: "DM Serif Display", serif;
+    font-weight: 400;
+    font-size: clamp(3rem, 8vw, 5rem);
+    margin-bottom: 40px;
 }
 
-.letter h2{
-    font-family:"DM Serif Display",serif;
-    text-align:center;
-    font-size:clamp(3rem,8vw,5rem);
-    margin-bottom:40px;
+.message {
+    padding: 30px;
+    border: 1px dashed rgba(48,32,21,.3);
+    font-family: Kalam, cursive;
+    font-size: 1.3rem;
+    line-height: 2;
+    white-space: pre-line;
 }
 
-.your-text{
-    min-height:300px;
-    border:2px dashed rgba(58,34,22,.3);
-    padding:35px;
-    font-size:1.35rem;
-    line-height:2;
+.final-button {
+    display: block;
+    margin: 40px auto 0;
+    padding: 14px 34px;
+    border: 1px solid var(--ink);
+    background: var(--ink);
+    color: var(--paper);
+    cursor: pointer;
+    transition: .25s;
 }
 
-.your-text span{
-    opacity:.4;
+.final-button:hover {
+    background: transparent;
+    color: var(--ink);
 }
 
-/* =====================================================
+/* =========================================================
    END
-===================================================== */
+========================================================= */
 
-#ending{
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    text-align:center;
+#ending {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
     background:
         radial-gradient(
             ellipse at center,
-            #63381e,
-            #21110a
+            #382519,
+            #080706
         );
 }
 
-.ending{
-    width:min(700px,92vw);
+.end-content {
+    width: min(700px, 90vw);
 }
 
-.ending .eyebrow{
-    margin-bottom:20px;
+.end-small {
+    text-transform: uppercase;
+    letter-spacing: 5px;
+    font-size: .7rem;
+    color: var(--muted);
 }
 
-.ending h2{
-    font-family:"DM Serif Display",serif;
-    font-size:clamp(4rem,11vw,7rem);
-    line-height:.85;
+.end-content h2 {
+    font-family: "DM Serif Display", serif;
+    font-size: clamp(4rem, 11vw, 7rem);
+    font-weight: 400;
+    margin: 20px 0;
 }
 
-.ending p{
-    margin-top:30px;
-    font-size:1.3rem;
-    opacity:.75;
+.end-content p {
+    color: var(--muted);
+    line-height: 1.8;
 }
 
-.end-glass{
-    position:relative;
-    width:120px;
-    height:170px;
-    margin:55px auto 0;
+.end-tea {
+    position: relative;
+    width: 110px;
+    height: 160px;
+    margin: 50px auto 0;
 }
 
-.end-glass-body{
-    position:absolute;
-    bottom:15px;
-    left:10px;
-    width:100px;
-    height:135px;
-    clip-path:polygon(
-        7% 0,
-        93% 0,
+.end-glass {
+    position: absolute;
+    left: 8px;
+    bottom: 15px;
+    width: 94px;
+    height: 130px;
+    clip-path: polygon(
+        5% 0,
+        95% 0,
         82% 100%,
         18% 100%
     );
-    border:4px solid rgba(255,255,255,.5);
-    overflow:hidden;
+    border: 3px solid rgba(255,255,255,.35);
+    overflow: hidden;
 }
 
-.end-tea{
-    position:absolute;
-    bottom:0;
-    width:100%;
-    height:75%;
-    background:#803713;
+.end-liquid {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 75%;
+    background: #7b3313;
 }
 
-.end-saucer{
-    position:absolute;
-    bottom:0;
-    width:120px;
-    height:27px;
-    border-radius:50%;
-    background:#c8a77b;
+.end-saucer {
+    position: absolute;
+    bottom: 0;
+    width: 110px;
+    height: 22px;
+    border-radius: 50%;
+    background: #b89b72;
 }
 
-/* =====================================================
-   PARTICLES
-===================================================== */
-
-.particle{
-    position:fixed;
-    pointer-events:none;
-    z-index:900;
-    font-size:1.5rem;
-    animation:particle 1.8s forwards ease-out;
-}
-
-@keyframes particle{
-    0%{
-        opacity:1;
-        transform:translate(-50%,-50%) scale(.5);
-    }
-
-    100%{
-        opacity:0;
-        transform:
-            translate(
-                calc(-50% + var(--move)),
-                calc(-50% - 160px)
-            )
-            scale(1.4)
-            rotate(20deg);
-    }
-}
-
-/* =====================================================
+/* =========================================================
    MOBILE
-===================================================== */
+========================================================= */
 
-@media(max-width:700px){
+@media (max-width: 750px) {
 
-    .paper,
-    .letter{
-        padding:50px 25px;
+    .room-label {
+        top: 30px;
+        left: 25px;
     }
 
-    .photos{
-        grid-template-columns:1fr;
-        max-width:400px;
-        margin-left:auto;
-        margin-right:auto;
+    .room-label h2 {
+        font-size: 2rem;
     }
 
-    .photo img{
-        height:330px;
+    .teapot {
+        left: 8%;
+        transform: scale(.72);
+        transform-origin: bottom left;
     }
 
-    .sugar-box{
-        left:3%;
-        transform:scale(.75) rotate(-4deg);
+    .glass-area {
+        left: 61%;
+        transform: scale(.82);
+        transform-origin: bottom left;
     }
 
-    .big-spoon{
-        right:3%;
-        transform:scale(.75) rotate(32deg);
+    .photo-grid {
+        grid-template-columns: 1fr;
+        max-width: 450px;
+        margin-left: auto;
+        margin-right: auto;
     }
 
-    .tea-holder{
-        transform:translateX(-50%) scale(.85);
+    .photo-card:nth-child(1),
+    .photo-card:nth-child(2),
+    .photo-card:nth-child(3) {
+        margin-top: 0;
     }
 
-    .tea-holder:hover{
-        transform:translateX(-50%) scale(.88);
-    }
-
-    .tea-instruction{
-        bottom:5%;
+    .letter-paper {
+        padding: 50px 25px;
     }
 }
 </style>
@@ -894,28 +792,28 @@ body::before{
 
 <section id="opening">
 
-    <div class="opening-lamp"></div>
-
     <div class="opening-content">
 
-        <div class="eyebrow">
-            SIT DOWN.
+        <div class="mini">
+            For Mazonty
         </div>
 
         <h1>
-            Tea<br>
-            <span>& Things.</span>
+            Come<br>
+            Here.
         </h1>
 
         <p>
-            There's a cup of Egyptian tea waiting for you.
-            Don't worry, this isn't some ridiculously fancy tea ceremony.
-            It's just tea.
-            And maybe a few things I haven't said yet.
+            I made you something.
+            Don't ask too many questions.
+            Just go with it.
         </p>
 
-        <button class="begin" onclick="goTo('teaRoom')">
-            POUR THE TEA
+        <button
+            class="start"
+            onclick="goTo('teaRoom')"
+        >
+            Okay, fine.
         </button>
 
     </div>
@@ -924,37 +822,72 @@ body::before{
 
 
 <!-- =====================================================
-     TEA ROOM
+     TEA SCENE
 ===================================================== -->
 
 <section id="teaRoom">
 
-    <div class="wall"></div>
+    <div class="wall-light"></div>
 
-    <div class="room-title">
-        <h2>Tea First.</h2>
-        <p>We can deal with everything else afterwards.</p>
+    <div class="room-label">
+
+        <span>Step one</span>
+
+        <h2>Make the tea.</h2>
+
     </div>
 
-    <div class="table"></div>
 
-    <div class="sugar-box"></div>
+    <div class="table">
+        <div class="table-top"></div>
+    </div>
 
-    <div class="big-spoon"></div>
 
-    <div class="tea-holder" onclick="teaClick()">
+    <!-- TEAPOT -->
 
-        <div class="steam steam1"></div>
-        <div class="steam steam2"></div>
-        <div class="steam steam3"></div>
+    <div
+        class="teapot"
+        id="teapot"
+        onclick="pourTea()"
+    >
+
+        <div class="lid"></div>
+
+        <div class="handle"></div>
+
+        <div class="spout"></div>
+
+        <div class="pot"></div>
+
+    </div>
+
+
+    <!-- POURING STREAM -->
+
+    <div
+        class="stream"
+        id="stream"
+    ></div>
+
+
+    <!-- TEA GLASS -->
+
+    <div class="glass-area">
+
+        <div class="steam one"></div>
+        <div class="steam two"></div>
+        <div class="steam three"></div>
 
         <div class="glass">
 
-            <div class="tea"></div>
+            <div
+                class="liquid"
+                id="liquid"
+            ></div>
 
-            <div class="tea-surface"></div>
+            <div class="surface"></div>
 
-            <div class="glass-highlight"></div>
+            <div class="shine"></div>
 
         </div>
 
@@ -962,16 +895,15 @@ body::before{
 
     </div>
 
-    <div class="tea-instruction">
 
-        <h3>Go on. Click the tea.</h3>
+    <div class="tea-help">
 
-        <p>
-            Yes, the tea is part of the website.
-        </p>
+        <div>
+            Click the teapot.
+        </div>
 
         <div id="teaStatus">
-            The tea is waiting.
+            The tea is empty.
         </div>
 
     </div>
@@ -980,45 +912,59 @@ body::before{
 
 
 <!-- =====================================================
-     TROPE
+     EARN THE NICE PART
 ===================================================== -->
 
-<section id="trope">
+<section id="earn">
 
-    <div class="paper">
+    <div class="earn-box">
 
-        <div class="paper-stain"></div>
-
-        <h2>
-            So Here's The Thing.
-        </h2>
-
-        <div class="paper-text">
-
-            There's something about sitting across from someone
-            with a glass of tea between you.
-
-            <br><br>
-
-            You talk.
-            You don't talk.
-            You pretend everything is fine.
-            You absolutely do not admit you're still annoyed.
-
-            <br><br>
-
-            And somehow the tea is just sitting there
-            like it knows everything.
-
-            <em>
-                ...which is probably why it was invited.
-            </em>
-
+        <div class="earn-label">
+            You have to earn it.
         </div>
 
-        <button class="continue" onclick="goTo('memories')">
-            Keep going.
-        </button>
+        <h2>
+            The nice part.
+        </h2>
+
+        <p>
+            You thought I was just going to give you
+            everything immediately?
+            Absolutely not.
+        </p>
+
+
+        <div class="task">
+
+            <div class="task-number">
+                Task 01
+            </div>
+
+            <h3>
+                Click the button.
+            </h3>
+
+            <p id="taskText">
+                That's it. Start easy.
+            </p>
+
+            <button
+                class="earn-button"
+                onclick="completeTask()"
+            >
+                Do it
+            </button>
+
+            <div class="progress">
+
+                <div
+                    class="progress-bar"
+                    id="progressBar"
+                ></div>
+
+            </div>
+
+        </div>
 
     </div>
 
@@ -1029,73 +975,83 @@ body::before{
      PHOTOS
 ===================================================== -->
 
-<section id="memories">
+<section id="photos">
 
-    <div class="gallery">
+    <div class="photos-wrap">
 
-        <h2>Some Things.</h2>
+        <div class="photos-title">
 
-        <div class="gallery-subtitle">
-            Put your pictures here.
+            <h2>
+                Okay.
+            </h2>
+
+            <p>
+                Maybe you earned this part.
+            </p>
+
         </div>
 
-        <div class="photos">
 
-            <!-- PHOTO 1 -->
+        <div class="photo-grid">
 
-            <div class="photo">
+
+            <!-- PHOTO ONE -->
+
+            <div class="photo-card">
 
                 <img
                     src="photo1.jpg"
                     alt="Photo 1"
                 >
 
-                <div class="photo-caption">
-                    Your caption.
+                <div class="caption">
+                    the cutest femboy ever
                 </div>
 
             </div>
 
 
-            <!-- PHOTO 2 -->
+            <!-- PHOTO TWO -->
 
-            <div class="photo">
+            <div class="photo-card">
 
                 <img
                     src="photo2.jpg"
                     alt="Photo 2"
                 >
 
-                <div class="photo-caption">
-                    Your caption.
+                <div class="caption">
+                    where did this sweet baby boy go?
                 </div>
 
             </div>
 
 
-            <!-- PHOTO 3 -->
+            <!-- PHOTO THREE -->
 
-            <div class="photo">
+            <div class="photo-card">
 
                 <img
                     src="photo3.jpg"
                     alt="Photo 3"
                 >
 
-                <div class="photo-caption">
-                    Your caption.
+                <div class="caption">
+                    we look so good (i look better ofc)<br>
+                    My fav day btw
                 </div>
 
             </div>
 
         </div>
 
+
         <button
-            class="continue"
-            style="margin-top:60px;"
+            class="earn-button"
+            style="display:block;margin:70px auto 0;"
             onclick="goTo('letter')"
         >
-            There's something I want to say.
+            One last thing.
         </button>
 
     </div>
@@ -1104,37 +1060,27 @@ body::before{
 
 
 <!-- =====================================================
-     PERSONAL LETTER
+     PERSONAL MESSAGE
 ===================================================== -->
 
 <section id="letter">
 
-    <div class="letter">
+    <div class="letter-paper">
 
         <h2>
-            This Part Is Yours.
+            hey.
         </h2>
 
-        <div class="your-text">
-
-            <!-- =================================================
-                 PUT YOUR OWN PARAGRAPH HERE
-                 
-                 I am NOT writing the personal paragraph for you.
-                 Replace the placeholder below with your text.
-            ================================================== -->
-
-            <span>
-                [ PUT YOUR PARAGRAPH HERE ]
-            </span>
-
-        </div>
+        <div class="message">hey mazonty, so this is awkward but wtvr . first of all, don't think i'm not mad at you cuz i am but wtvr 
+ anyways i love so much or wtvr and i miss you even more 
+u r a decent person and you deserve decent things even tho u r a pedophile 
+ i hope 18 treats u well and u get the car license u want (and ofc the 100% in qudurat) anyways i love you much baby</div>
 
         <button
-            class="continue"
+            class="final-button"
             onclick="goTo('ending')"
         >
-            Okay. One last thing.
+            That's all.
         </button>
 
     </div>
@@ -1148,25 +1094,26 @@ body::before{
 
 <section id="ending">
 
-    <div class="ending">
+    <div class="end-content">
 
-        <div class="eyebrow">
-            AFTER ALL THAT
+        <div class="end-small">
+            End of the website
         </div>
 
         <h2>
-            One Last Cup.
+            Fine.
         </h2>
 
         <p>
-            Maybe some things are easier to say
-            when there's tea on the table.
+            You made it to the end.
         </p>
 
-        <div class="end-glass">
+        <div class="end-tea">
 
-            <div class="end-glass-body">
-                <div class="end-tea"></div>
+            <div class="end-glass">
+
+                <div class="end-liquid"></div>
+
             </div>
 
             <div class="end-saucer"></div>
@@ -1180,222 +1127,271 @@ body::before{
 
 <script>
 
-/* =====================================================
+/* =========================================================
    NAVIGATION
-===================================================== */
+========================================================= */
 
-function goTo(id){
+function goTo(id) {
 
-    const section=document.getElementById(id);
+    const section =
+        document.getElementById(id);
 
-    if(!section)return;
+    if (!section) return;
 
     section.scrollIntoView({
-        behavior:"smooth"
+        behavior: "smooth"
     });
 
 }
 
 
-/* =====================================================
-   TEA INTERACTION
-===================================================== */
+/* =========================================================
+   TEA POURING
+========================================================= */
 
-let teaClicks=0;
+let teaFinished = false;
 
-const teaMessages=[
-    "The tea is waiting.",
-    "There. Better already.",
-    "See? Tea.",
-    "Don't get distracted.",
-    "I'm still annoyed, by the way.",
-    "But the tea is good.",
-    "Okay... maybe we're getting somewhere.",
-    "One more.",
-    "Fine. Keep going.",
-    "That's enough tea for now."
+function pourTea() {
+
+    if (teaFinished) return;
+
+    teaFinished = true;
+
+    const teapot =
+        document.getElementById("teapot");
+
+    const stream =
+        document.getElementById("stream");
+
+    const liquid =
+        document.getElementById("liquid");
+
+    const status =
+        document.getElementById("teaStatus");
+
+    const steam =
+        document.querySelectorAll(".steam");
+
+
+    /* Tilt teapot */
+
+    teapot.style.transform =
+        "rotate(-18deg) translateY(-8px)";
+
+
+    /* Start actual tea stream */
+
+    stream.classList.add("active");
+
+
+    /* Fill the glass */
+
+    setTimeout(() => {
+
+        liquid.style.height = "76%";
+
+    }, 200);
+
+
+    /* Steam begins */
+
+    setTimeout(() => {
+
+        steam.forEach(item => {
+            item.classList.add("show");
+        });
+
+    }, 900);
+
+
+    /* Finish pouring */
+
+    setTimeout(() => {
+
+        stream.classList.remove("active");
+
+        teapot.style.transform =
+            "rotate(0deg)";
+
+        status.textContent =
+            "There. Tea."
+
+    }, 2300);
+
+
+    /* Continue */
+
+    setTimeout(() => {
+
+        goTo("earn");
+
+    }, 3200);
+
+}
+
+
+/* =========================================================
+   EARN THE NICE PART
+========================================================= */
+
+let taskProgress = 0;
+
+const taskMessages = [
+
+    "That's it. Start easy.",
+
+    "Okay, you can follow instructions.",
+
+    "Don't get too confident.",
+
+    "You're getting there.",
+
+    "Almost.",
+
+    "Fine. Maybe you deserve it.",
+
+    "Okay. You earned it."
+
 ];
 
-function teaClick(){
+function completeTask() {
 
-    teaClicks++;
+    taskProgress++;
 
-    const status=document.getElementById("teaStatus");
+    if (taskProgress > 7) {
+        taskProgress = 7;
+    }
 
-    status.textContent=
-        teaMessages[
-            Math.min(
-                teaClicks-1,
-                teaMessages.length-1
-            )
-        ];
+    const text =
+        document.getElementById("taskText");
 
-    createParticles(teaClicks>=4 ? 15 : 7);
+    const bar =
+        document.getElementById("progressBar");
 
-    const glass=document.querySelector(".tea-holder");
+    const button =
+        document.querySelector(".earn-button");
 
-    glass.animate(
-        [
-            {
-                transform:"translateX(-50%) rotate(0deg)"
-            },
-            {
-                transform:"translateX(-50%) rotate(-4deg)"
-            },
-            {
-                transform:"translateX(-50%) rotate(4deg)"
-            },
-            {
-                transform:"translateX(-50%) rotate(0deg)"
-            }
-        ],
+    text.textContent =
+        taskMessages[taskProgress - 1];
+
+    bar.style.width =
+        ((taskProgress / 7) * 100) + "%";
+
+
+    if (taskProgress === 7) {
+
+        button.textContent =
+            "Okay, continue.";
+
+        button.onclick = () => {
+            goTo("photos");
+        };
+
+    }
+
+}
+
+
+/* =========================================================
+   PHOTO REVEAL
+========================================================= */
+
+const observer =
+    new IntersectionObserver(
+        entries => {
+
+            entries.forEach(entry => {
+
+                if (entry.isIntersecting) {
+
+                    entry.target.style.opacity = "1";
+
+                    entry.target.style.transform =
+                        entry.target.dataset.originalTransform ||
+                        "translateY(0)";
+
+                }
+
+            });
+
+        },
         {
-            duration:450
+            threshold: .12
         }
     );
 
-    if(teaClicks>=10){
 
-        setTimeout(()=>{
-            goTo("trope");
-        },700);
+document
+    .querySelectorAll(".photo-card")
+    .forEach(card => {
 
-    }
+        card.dataset.originalTransform =
+            getComputedStyle(card).transform;
 
-}
+        card.style.opacity = "0";
 
+        card.style.transform =
+            "translateY(40px)";
 
-/* =====================================================
-   PARTICLES
-===================================================== */
+        card.style.transition =
+            "opacity .8s ease, transform .8s ease";
 
-function createParticles(amount){
+        observer.observe(card);
 
-    const symbols=[
-        "☕",
-        "✦",
-        "·",
-        "♡",
-        "✧"
-    ];
-
-    for(let i=0;i<amount;i++){
-
-        const particle=document.createElement("div");
-
-        particle.className="particle";
-
-        particle.textContent=
-            symbols[
-                Math.floor(
-                    Math.random()*symbols.length
-                )
-            ];
-
-        particle.style.left=
-            (40+Math.random()*20)+"%";
-
-        particle.style.top=
-            (40+Math.random()*20)+"%";
-
-        particle.style.setProperty(
-            "--move",
-            ((Math.random()-.5)*220)+"px"
-        );
-
-        document.body.appendChild(particle);
-
-        setTimeout(()=>{
-            particle.remove();
-        },1900);
-
-    }
-
-}
+    });
 
 
-/* =====================================================
-   DUST
-===================================================== */
+/* =========================================================
+   SMALL CLICK PARTICLES
+========================================================= */
 
-function createDust(){
+document.addEventListener("click", event => {
 
-    const opening=document.getElementById("opening");
+    const particle =
+        document.createElement("div");
 
-    for(let i=0;i<35;i++){
+    particle.textContent = "·";
 
-        const dust=document.createElement("div");
+    particle.style.position = "fixed";
+    particle.style.left =
+        event.clientX + "px";
+    particle.style.top =
+        event.clientY + "px";
 
-        dust.className="dust";
+    particle.style.color =
+        "#c48b52";
 
-        dust.style.left=
-            Math.random()*100+"%";
+    particle.style.pointerEvents =
+        "none";
 
-        dust.style.animationDuration=
-            (7+Math.random()*10)+"s";
+    particle.style.zIndex =
+        "9999";
 
-        dust.style.animationDelay=
-            (-Math.random()*10)+"s";
+    document.body.appendChild(
+        particle
+    );
 
-        dust.style.width=
-            (2+Math.random()*4)+"px";
-
-        dust.style.height=
-            dust.style.width;
-
-        opening.appendChild(dust);
-
-    }
-
-}
-
-createDust();
-
-
-/* =====================================================
-   RANDOM SMALL TEA PARTICLES
-===================================================== */
-
-setInterval(()=>{
-
-    const teaRoom=document.getElementById("teaRoom");
-
-    const rect=teaRoom.getBoundingClientRect();
-
-    if(rect.top<window.innerHeight && rect.bottom>0){
-
-        if(Math.random()<.35){
-
-            createParticles(3);
-
+    particle.animate(
+        [
+            {
+                opacity: 1,
+                transform:
+                    "translateY(0) scale(1)"
+            },
+            {
+                opacity: 0,
+                transform:
+                    "translateY(-25px) scale(2)"
+            }
+        ],
+        {
+            duration: 600
         }
+    );
 
-    }
-
-},1500);
-
-
-/* =====================================================
-   KEYBOARD EASTER EGG
-===================================================== */
-
-let secret="";
-
-document.addEventListener("keydown",event=>{
-
-    secret+=event.key.toLowerCase();
-
-    if(secret.length>12){
-        secret=secret.slice(-12);
-    }
-
-    if(secret.includes("tea")){
-
-        createParticles(25);
-
-        secret="";
-
-    }
+    setTimeout(() => {
+        particle.remove();
+    }, 600);
 
 });
 
