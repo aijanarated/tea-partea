@@ -3,27 +3,24 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>For Mazonty</title>
+<title>Happy Birthday, Mazonty</title>
 
 <style>
 @import url('https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Inter:wght@300;400;500;600&family=Kalam:wght@400;700&display=swap');
 
-:root {
-    --bg: #0b0908;
-    --bg2: #15100d;
-    --warm: #a86435;
-    --warm2: #d29a62;
-    --cream: #f1e4cf;
-    --muted: #9c8b79;
-    --paper: #efe0c2;
-    --ink: #302015;
-}
-
 * {
+    box-sizing: border-box;
     margin: 0;
     padding: 0;
-    box-sizing: border-box;
+}
+
+:root {
+    --cream: #fff4dc;
+    --gold: #e7b85c;
+    --pink: #e9899b;
+    --blue: #6da6d8;
+    --green: #8eae78;
+    --ink: #211b18;
 }
 
 html {
@@ -31,7 +28,7 @@ html {
 }
 
 body {
-    background: var(--bg);
+    background: #151313;
     color: var(--cream);
     font-family: Inter, sans-serif;
     overflow-x: hidden;
@@ -41,142 +38,590 @@ button {
     font-family: inherit;
 }
 
-section {
+
+/* =========================================================
+   GLOBAL
+========================================================= */
+
+.scene {
     min-height: 100vh;
     position: relative;
-}
-
-/* =========================================================
-   OPENING
-========================================================= */
-
-#opening {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-    background:
-        radial-gradient(
-            circle at 50% 60%,
-            rgba(170, 95, 43, .18),
-            transparent 35%
-        ),
-        linear-gradient(145deg, #0b0908, #1b120d);
-}
-
-.opening-content {
-    width: min(850px, 90vw);
-}
-
-.mini {
-    text-transform: uppercase;
-    letter-spacing: 6px;
-    font-size: .68rem;
-    color: var(--muted);
-}
-
-.opening-content h1 {
-    font-family: "DM Serif Display", serif;
-    font-size: clamp(4rem, 12vw, 8rem);
-    font-weight: 400;
-    line-height: .88;
-    margin: 25px 0;
-}
-
-.opening-content p {
-    max-width: 530px;
-    margin: auto;
-    color: var(--muted);
-    line-height: 1.8;
-}
-
-.start {
-    margin-top: 40px;
-    padding: 14px 36px;
-    border: 1px solid rgba(241, 228, 207, .3);
-    color: var(--cream);
-    background: transparent;
-    cursor: pointer;
-    transition: .3s;
-}
-
-.start:hover {
-    background: var(--cream);
-    color: var(--bg);
-}
-
-/* =========================================================
-   TEA ROOM
-========================================================= */
-
-#teaRoom {
-    background:
-        radial-gradient(
-            ellipse at 50% 55%,
-            rgba(171, 99, 49, .24),
-            transparent 38%
-        ),
-        linear-gradient(#18110d, #090807);
     overflow: hidden;
 }
 
-.room-label {
+.hidden {
+    display: none !important;
+}
+
+
+/* =========================================================
+   OPENING — PHOTOGRAPH-LIKE TABLE SCENE
+========================================================= */
+
+#scene {
+    height: 100vh;
+    min-height: 680px;
+
+    background:
+        radial-gradient(
+            ellipse at 50% 18%,
+            rgba(255,238,198,.85) 0%,
+            rgba(255,224,167,.25) 24%,
+            transparent 55%
+        ),
+        linear-gradient(
+            145deg,
+            #536a72 0%,
+            #8b9c9a 25%,
+            #d2bd91 57%,
+            #76604f 100%
+        );
+}
+
+
+/* BACK WALL */
+
+.wall {
     position: absolute;
-    top: 55px;
-    left: 55px;
-    z-index: 10;
+    inset: 0 0 43% 0;
+
+    background:
+        linear-gradient(
+            110deg,
+            rgba(255,255,255,.22),
+            transparent 28%,
+            rgba(255,255,255,.08) 65%,
+            rgba(0,0,0,.12)
+        ),
+        repeating-linear-gradient(
+            90deg,
+            rgba(255,255,255,.025) 0,
+            rgba(255,255,255,.025) 2px,
+            transparent 2px,
+            transparent 80px
+        );
+
+    filter: saturate(1.1);
 }
 
-.room-label span {
-    display: block;
-    text-transform: uppercase;
-    letter-spacing: 4px;
-    font-size: .65rem;
-    color: var(--muted);
-    margin-bottom: 10px;
-}
 
-.room-label h2 {
-    font-family: "DM Serif Display", serif;
-    font-size: 2.6rem;
-    font-weight: 400;
-}
+/* WINDOW / LIGHT */
 
-.wall-light {
+.window {
     position: absolute;
-    width: 500px;
-    height: 500px;
+    width: 35%;
+    height: 48%;
+    left: 10%;
+    top: 7%;
+
+    background:
+        linear-gradient(
+            125deg,
+            rgba(240,248,255,.9),
+            rgba(164,204,218,.42)
+        );
+
+    border: 13px solid rgba(61,57,50,.55);
+
+    box-shadow:
+        inset 0 0 35px rgba(255,255,255,.5),
+        0 18px 45px rgba(0,0,0,.18);
+}
+
+.window::before,
+.window::after {
+    content: "";
+    position: absolute;
+    background: rgba(61,57,50,.45);
+}
+
+.window::before {
+    width: 8px;
+    height: 100%;
     left: 50%;
-    top: 15%;
-    transform: translateX(-50%);
-    background: rgba(190, 117, 59, .08);
-    filter: blur(90px);
 }
+
+.window::after {
+    height: 8px;
+    width: 100%;
+    top: 50%;
+}
+
+
+/* BIRTHDAY LIGHTS */
+
+.lights {
+    position: absolute;
+    top: 4%;
+    right: 8%;
+    width: 46%;
+    display: flex;
+    justify-content: space-around;
+}
+
+.bulb {
+    width: 15px;
+    height: 22px;
+    border-radius: 50%;
+    background: var(--gold);
+
+    box-shadow:
+        0 0 10px var(--gold),
+        0 0 28px rgba(231,184,92,.8);
+
+    animation: blink 2.4s infinite alternate;
+}
+
+.bulb:nth-child(2) {
+    background: var(--pink);
+    box-shadow: 0 0 18px var(--pink);
+    animation-delay: .4s;
+}
+
+.bulb:nth-child(3) {
+    background: var(--blue);
+    box-shadow: 0 0 18px var(--blue);
+    animation-delay: .8s;
+}
+
+.bulb:nth-child(4) {
+    background: var(--green);
+    box-shadow: 0 0 18px var(--green);
+    animation-delay: 1.2s;
+}
+
+.bulb:nth-child(5) {
+    background: var(--gold);
+    animation-delay: 1.6s;
+}
+
+@keyframes blink {
+    from { opacity: .55; }
+    to { opacity: 1; }
+}
+
+
+/* BIRTHDAY BANNER */
+
+.banner {
+    position: absolute;
+    top: 13%;
+    right: 8%;
+    width: 38%;
+    text-align: center;
+    transform: rotate(2deg);
+}
+
+.banner span {
+    display: inline-block;
+    margin: 4px;
+    padding: 13px 12px 16px;
+
+    background: #f0c75e;
+    color: #40301d;
+
+    clip-path: polygon(
+        0 0,
+        100% 0,
+        100% 82%,
+        50% 100%,
+        0 82%
+    );
+
+    font-weight: 700;
+    font-size: clamp(.75rem, 1.7vw, 1.2rem);
+
+    box-shadow:
+        0 5px 10px rgba(0,0,0,.15);
+}
+
+.banner span:nth-child(even) {
+    background: #e991a2;
+}
+
+.banner span:nth-child(3n) {
+    background: #73a6d1;
+}
+
+
+/* =========================================================
+   PERSON OPPOSITE
+========================================================= */
+
+.person {
+    position: absolute;
+    z-index: 4;
+
+    left: 50%;
+    top: 22%;
+
+    transform: translateX(-50%);
+
+    width: 210px;
+    height: 310px;
+
+    opacity: .65;
+
+    filter:
+        blur(.25px)
+        drop-shadow(0 20px 25px rgba(0,0,0,.3));
+}
+
+
+/* head */
+
+.person .head {
+    position: absolute;
+    width: 98px;
+    height: 118px;
+
+    left: 56px;
+    top: 0;
+
+    border-radius: 48% 48% 44% 44%;
+
+    background:
+        radial-gradient(
+            circle at 40% 28%,
+            rgba(255,255,255,.15),
+            transparent 20%
+        ),
+        linear-gradient(
+            120deg,
+            #342c29,
+            #171313 65%,
+            #090808
+        );
+}
+
+
+/* shoulders */
+
+.person .body {
+    position: absolute;
+
+    width: 205px;
+    height: 180px;
+
+    left: 3px;
+    top: 100px;
+
+    border-radius:
+        55% 55% 10% 10%;
+
+    background:
+        linear-gradient(
+            110deg,
+            #332d2b,
+            #141212 55%,
+            #080707
+        );
+
+    box-shadow:
+        0 30px 35px rgba(0,0,0,.35);
+}
+
+
+/* chair */
+
+.person .chair {
+    position: absolute;
+
+    width: 275px;
+    height: 260px;
+
+    left: -32px;
+    top: 74px;
+
+    border-radius: 45% 45% 8px 8px;
+
+    border:
+        15px solid rgba(43,38,35,.55);
+
+    z-index: -1;
+}
+
+
+/* =========================================================
+   TABLE
+========================================================= */
 
 .table {
     position: absolute;
-    left: 0;
-    bottom: 0;
-    width: 100%;
-    height: 35%;
+    z-index: 10;
+
+    bottom: -10%;
+    left: -8%;
+
+    width: 116%;
+    height: 53%;
+
+    transform:
+        perspective(850px)
+        rotateX(54deg);
+
+    transform-origin: bottom center;
+
     background:
+        linear-gradient(
+            90deg,
+            rgba(0,0,0,.22),
+            transparent 25%,
+            rgba(255,255,255,.08) 50%,
+            transparent 75%,
+            rgba(0,0,0,.18)
+        ),
         repeating-linear-gradient(
             90deg,
-            #3b2418 0,
-            #3b2418 42px,
-            #342016 43px,
-            #342016 84px
+            #8e674b 0,
+            #8e674b 37px,
+            #79543c 39px,
+            #79543c 75px
         );
-    box-shadow: 0 -25px 50px rgba(0,0,0,.4);
+
+    box-shadow:
+        0 -35px 55px rgba(0,0,0,.3);
 }
 
-.table-top {
+
+/* wood grain */
+
+.table::before {
+    content: "";
+
     position: absolute;
-    top: 0;
-    width: 100%;
-    height: 8px;
-    background: #24140d;
+    inset: 0;
+
+    background:
+        repeating-linear-gradient(
+            4deg,
+            transparent 0,
+            transparent 35px,
+            rgba(40,22,12,.18) 36px,
+            transparent 39px
+        );
+
+    opacity: .7;
 }
+
+
+/* =========================================================
+   TABLE OBJECTS
+========================================================= */
+
+.table-object {
+    position: absolute;
+    z-index: 20;
+}
+
+
+/* PLATE */
+
+.plate {
+    width: 170px;
+    height: 35px;
+
+    border-radius: 50%;
+
+    background:
+        radial-gradient(
+            ellipse,
+            #fff 0 55%,
+            #d9d2c4 58%,
+            #a9a196 65%,
+            #fff 67%
+        );
+
+    left: 18%;
+    top: 34%;
+
+    transform: rotate(-4deg);
+
+    box-shadow:
+        0 12px 15px rgba(0,0,0,.28);
+}
+
+
+/* CAKE */
+
+.cake {
+    position: absolute;
+
+    width: 125px;
+    height: 72px;
+
+    left: 50%;
+    top: 29%;
+
+    transform: translateX(-50%);
+
+    background:
+        linear-gradient(
+            #f5a8b7,
+            #d86f86
+        );
+
+    border-radius: 8px 8px 18px 18px;
+
+    box-shadow:
+        0 12px 18px rgba(0,0,0,.25);
+}
+
+.cake::before {
+    content: "";
+
+    position: absolute;
+
+    left: 0;
+    top: -20px;
+
+    width: 100%;
+    height: 30px;
+
+    border-radius: 50%;
+
+    background:
+        radial-gradient(
+            circle,
+            #fff1df,
+            #ffd3db
+        );
+}
+
+.cake::after {
+    content: "18";
+
+    position: absolute;
+
+    left: 50%;
+    top: -5px;
+
+    transform: translateX(-50%);
+
+    color: #8d4a5d;
+
+    font-family:
+        "DM Serif Display",
+        serif;
+
+    font-size: 1.2rem;
+}
+
+
+/* CANDLE */
+
+.candle {
+    position: absolute;
+
+    width: 9px;
+    height: 42px;
+
+    left: 50%;
+    top: -45px;
+
+    background:
+        repeating-linear-gradient(
+            0deg,
+            #fff 0,
+            #fff 8px,
+            #e7a1ad 8px,
+            #e7a1ad 13px
+        );
+}
+
+.flame {
+    position: absolute;
+
+    width: 13px;
+    height: 21px;
+
+    left: -2px;
+    top: -21px;
+
+    background:
+        radial-gradient(
+            ellipse at center bottom,
+            #fff 0 20%,
+            #ffc34d 35%,
+            #f07831 65%,
+            transparent 70%
+        );
+
+    animation: flame .6s infinite alternate;
+}
+
+@keyframes flame {
+    from { transform: rotate(-3deg) scale(.92); }
+    to { transform: rotate(4deg) scale(1.08); }
+}
+
+
+/* CONFETTI */
+
+.confetti {
+    position: absolute;
+    inset: 0;
+    z-index: 25;
+    pointer-events: none;
+}
+
+.confetti span {
+    position: absolute;
+
+    width: 8px;
+    height: 16px;
+
+    animation:
+        float 4s infinite ease-in-out;
+
+    opacity: .9;
+}
+
+.confetti span:nth-child(1) {
+    left: 15%;
+    top: 25%;
+    background: var(--pink);
+    transform: rotate(20deg);
+}
+
+.confetti span:nth-child(2) {
+    left: 27%;
+    top: 10%;
+    background: var(--blue);
+    transform: rotate(-30deg);
+}
+
+.confetti span:nth-child(3) {
+    left: 70%;
+    top: 23%;
+    background: var(--gold);
+    transform: rotate(40deg);
+}
+
+.confetti span:nth-child(4) {
+    left: 82%;
+    top: 35%;
+    background: var(--green);
+    transform: rotate(-20deg);
+}
+
+.confetti span:nth-child(5) {
+    left: 60%;
+    top: 12%;
+    background: var(--pink);
+    transform: rotate(60deg);
+}
+
+@keyframes float {
+    0%,100% {
+        transform: translateY(0) rotate(10deg);
+    }
+
+    50% {
+        transform: translateY(20px) rotate(180deg);
+    }
+}
+
 
 /* =========================================================
    TEAPOT
@@ -184,239 +629,386 @@ section {
 
 .teapot {
     position: absolute;
-    z-index: 20;
-    left: 27%;
-    bottom: 23%;
-    width: 230px;
-    height: 190px;
+    z-index: 35;
+
+    left: 38%;
+    top: 24%;
+
+    width: 150px;
+    height: 120px;
+
     cursor: pointer;
-    transition: transform .5s ease;
+
+    transition:
+        transform .7s cubic-bezier(.2,.8,.2,1);
 }
 
-.pot {
+.teapot-body {
     position: absolute;
-    left: 32px;
-    bottom: 20px;
-    width: 150px;
-    height: 115px;
+
+    width: 105px;
+    height: 78px;
+
+    left: 23px;
+    top: 30px;
+
     border-radius: 48%;
+
     background:
         radial-gradient(
             circle at 35% 25%,
-            #a96538,
-            #703d22 55%,
-            #442216
+            #d9d6ce,
+            #aaa9a4 28%,
+            #77756f 55%,
+            #4d4a45 100%
         );
+
     box-shadow:
-        inset 10px 10px 20px rgba(255,255,255,.08),
-        12px 15px 25px rgba(0,0,0,.4);
+        inset -12px -12px 18px rgba(0,0,0,.35),
+        8px 13px 20px rgba(0,0,0,.28);
 }
 
-.lid {
+.teapot-lid {
     position: absolute;
-    top: 16px;
-    left: 53px;
-    width: 110px;
-    height: 28px;
+
+    width: 72px;
+    height: 18px;
+
+    left: 39px;
+    top: 20px;
+
     border-radius: 50%;
-    background: #814a29;
+
+    background:
+        linear-gradient(
+            #dedbd3,
+            #77746f
+        );
 }
 
-.lid::after {
-    content: "";
+.teapot-knob {
     position: absolute;
-    left: 43px;
-    top: -13px;
-    width: 25px;
-    height: 16px;
+
+    width: 18px;
+    height: 15px;
+
+    left: 66px;
+    top: 10px;
+
     border-radius: 50%;
-    background: #965a31;
+
+    background: #696762;
 }
 
-.handle {
+.teapot-handle {
     position: absolute;
+
+    width: 58px;
+    height: 64px;
+
     right: 0;
-    top: 47px;
-    width: 75px;
-    height: 82px;
-    border: 14px solid #5a2e19;
+    top: 37px;
+
+    border:
+        12px solid #696762;
+
     border-left: 0;
-    border-radius: 0 50% 50% 0;
+
+    border-radius:
+        0 50% 50% 0;
 }
 
-.spout {
+.teapot-spout {
     position: absolute;
-    left: -48px;
-    top: 62px;
-    width: 78px;
-    height: 36px;
-    background: #64331c;
-    transform: rotate(-22deg);
-    clip-path: polygon(
-        100% 20%,
-        100% 80%,
-        0 100%,
-        22% 50%,
-        0 0
-    );
+
+    left: -20px;
+    top: 45px;
+
+    width: 50px;
+    height: 28px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #8b8983,
+            #4e4b46
+        );
+
+    clip-path:
+        polygon(
+            100% 30%,
+            100% 70%,
+            0 100%,
+            25% 50%,
+            0 0
+        );
+
+    transform: rotate(-8deg);
 }
+
 
 /* =========================================================
-   GLASS
+   TEA GLASS
 ========================================================= */
 
-.glass-area {
+.tea-glass {
     position: absolute;
-    z-index: 18;
-    left: 58%;
-    bottom: 18%;
-    width: 130px;
-    height: 190px;
+    z-index: 40;
+
+    left: 54%;
+    top: 31%;
+
+    width: 73px;
+    height: 112px;
+
+    cursor: pointer;
 }
 
-.glass {
+.glass-body {
     position: absolute;
-    left: 10px;
-    bottom: 20px;
-    width: 108px;
-    height: 150px;
-    clip-path: polygon(
-        5% 0,
-        95% 0,
-        82% 100%,
-        18% 100%
-    );
-    border-left: 3px solid rgba(255,255,255,.4);
-    border-right: 3px solid rgba(255,255,255,.4);
-    border-bottom: 3px solid rgba(255,255,255,.4);
-    background: rgba(255,255,255,.025);
+
+    width: 100%;
+    height: 100%;
+
+    clip-path:
+        polygon(
+            4% 0,
+            96% 0,
+            83% 100%,
+            17% 100%
+        );
+
+    border:
+        2px solid rgba(255,255,255,.7);
+
+    background:
+        linear-gradient(
+            90deg,
+            rgba(255,255,255,.25),
+            rgba(255,255,255,.04),
+            rgba(255,255,255,.18)
+        );
+
     overflow: hidden;
+
+    box-shadow:
+        0 15px 20px rgba(0,0,0,.25);
 }
 
-.liquid {
+.tea {
     position: absolute;
-    left: 0;
+
     bottom: 0;
+
     width: 100%;
     height: 0;
-    background: linear-gradient(
-        90deg,
-        #60260f,
-        #9a4318,
-        #6c2b10
-    );
-    transition: height 1.7s ease;
+
+    background:
+        linear-gradient(
+            90deg,
+            #7b3215,
+            #b85b23,
+            #7d3214
+        );
+
+    transition:
+        height 1.8s cubic-bezier(.25,.7,.25,1);
 }
 
-.surface {
+.tea-surface {
     position: absolute;
-    left: 2%;
+
     top: -6px;
+    left: 2%;
+
     width: 96%;
-    height: 14px;
+    height: 13px;
+
     border-radius: 50%;
-    background: #873711;
+
+    background:
+        #8e3915;
 }
 
-.shine {
+.glass-shine {
     position: absolute;
-    top: 15px;
-    left: 20px;
+
     width: 7px;
-    height: 105px;
+    height: 82%;
+
+    left: 14px;
+    top: 8%;
+
     border-radius: 50%;
-    background: rgba(255,255,255,.18);
+
+    background:
+        linear-gradient(
+            transparent,
+            rgba(255,255,255,.5),
+            transparent
+        );
 }
+
+
+/* SAUCER */
 
 .saucer {
     position: absolute;
-    bottom: 4px;
-    left: 0;
-    width: 130px;
-    height: 25px;
+
+    width: 100px;
+    height: 20px;
+
+    left: -14px;
+    bottom: -7px;
+
     border-radius: 50%;
-    background: #b9a07a;
+
+    background:
+        radial-gradient(
+            ellipse,
+            #fff,
+            #cfc8bc
+        );
 }
 
-.stream {
+
+/* TEA STREAM */
+
+.tea-stream {
     position: absolute;
-    z-index: 30;
-    left: 50%;
-    top: 100%;
-    width: 8px;
+    z-index: 45;
+
+    width: 6px;
     height: 0;
-    background: #934117;
-    border-radius: 10px;
+
+    left: 51%;
+    top: 43%;
+
+    border-radius: 50%;
+
+    background:
+        linear-gradient(
+            #c26a2b,
+            #7b3215
+        );
+
     opacity: 0;
+
+    transition:
+        height 1.2s ease,
+        opacity .2s ease;
 }
 
-.stream.active {
-    opacity: 1;
-    height: 170px;
-    animation: pouring .3s infinite alternate;
-}
 
-@keyframes pouring {
-    from { transform: translateX(-50%) scaleX(.8); }
-    to { transform: translateX(-50%) scaleX(1.15); }
-}
-
-/* =========================================================
-   STEAM
-========================================================= */
+/* STEAM */
 
 .steam {
     position: absolute;
-    width: 25px;
-    height: 100px;
-    bottom: 180px;
-    border-left: 3px solid rgba(255,255,255,.2);
+
+    z-index: 48;
+
+    width: 18px;
+    height: 90px;
+
+    border-left:
+        3px solid rgba(255,255,255,.35);
+
     border-radius: 50%;
+
     opacity: 0;
+
     filter: blur(2px);
+
+    pointer-events: none;
 }
 
-.steam.show {
+.steam.active {
     opacity: 1;
-    animation: steam 3s infinite ease-in-out;
+    animation: steam 3.2s infinite ease-in-out;
 }
 
-.steam.one { left: 35px; }
-.steam.two { left: 60px; animation-delay: 1s; }
-.steam.three { left: 82px; animation-delay: 1.7s; }
+.steam.a {
+    left: 55%;
+    top: 25%;
+}
+
+.steam.b {
+    left: 59%;
+    top: 24%;
+    animation-delay: 1.1s;
+}
 
 @keyframes steam {
     0% {
-        transform: translateY(15px) rotate(5deg);
+        transform:
+            translateY(20px)
+            rotate(4deg);
         opacity: 0;
     }
 
     35% {
-        opacity: .5;
+        opacity: .45;
     }
 
     100% {
-        transform: translateY(-80px) rotate(-8deg);
+        transform:
+            translateY(-75px)
+            rotate(-7deg);
         opacity: 0;
     }
 }
 
-.tea-help {
+
+/* =========================================================
+   INTRO TEXT
+========================================================= */
+
+.scene-title {
     position: absolute;
-    z-index: 30;
-    bottom: 6%;
+
+    z-index: 60;
+
     left: 50%;
+    bottom: 7%;
+
     transform: translateX(-50%);
+
     text-align: center;
+
     width: 90%;
-    color: var(--muted);
-    font-size: .9rem;
+
+    text-shadow:
+        0 3px 15px rgba(0,0,0,.55);
 }
 
-#teaStatus {
-    color: var(--warm2);
-    margin-top: 8px;
+.scene-title .small {
+    text-transform: uppercase;
+    letter-spacing: 5px;
+    font-size: .65rem;
+    opacity: .75;
 }
+
+.scene-title h1 {
+    margin-top: 10px;
+
+    font-family:
+        "DM Serif Display",
+        serif;
+
+    font-size:
+        clamp(2.5rem, 7vw, 5.5rem);
+
+    font-weight: 400;
+}
+
+.scene-title p {
+    margin-top: 8px;
+
+    font-size: .9rem;
+
+    opacity: .78;
+}
+
 
 /* =========================================================
    EARN SECTION
@@ -424,174 +1016,270 @@ section {
 
 #earn {
     min-height: 100vh;
-    background:
-        radial-gradient(
-            circle at center,
-            #3b261b,
-            #0b0908
-        );
+
     display: flex;
     align-items: center;
     justify-content: center;
+
+    padding: 70px 20px;
+
+    background:
+        radial-gradient(
+            circle at 50% 40%,
+            #3f3b35,
+            #121212 70%
+        );
+}
+
+.earn-container {
+    width: min(850px, 92vw);
     text-align: center;
-    padding: 40px 20px;
 }
 
-.earn-box {
-    width: min(800px, 92vw);
-}
-
-.earn-label {
-    color: var(--muted);
+.earn-container .label {
     text-transform: uppercase;
     letter-spacing: 5px;
-    font-size: .68rem;
+    color: #b9aa94;
+    font-size: .7rem;
 }
 
-.earn-box h2 {
-    font-family: "DM Serif Display", serif;
-    font-size: clamp(3.5rem, 10vw, 7rem);
+.earn-container h2 {
+    font-family:
+        "DM Serif Display",
+        serif;
+
+    font-size:
+        clamp(3.5rem, 10vw, 7rem);
+
     font-weight: 400;
-    line-height: .9;
-    margin: 25px 0;
+
+    margin: 18px 0;
 }
 
-.earn-box p {
+.earn-container > p {
+    color: #aaa19a;
+    line-height: 1.8;
     max-width: 550px;
     margin: auto;
-    color: var(--muted);
-    line-height: 1.8;
 }
 
-.task {
+.task-box {
     margin: 45px auto 0;
-    width: min(550px, 90vw);
-    padding: 25px;
-    border: 1px solid var(--line);
-    background: rgba(255,255,255,.025);
+
+    width: min(550px, 95%);
+
+    padding: 35px;
+
+    background:
+        linear-gradient(
+            145deg,
+            rgba(255,255,255,.08),
+            rgba(255,255,255,.025)
+        );
+
+    border:
+        1px solid rgba(255,255,255,.13);
+
+    box-shadow:
+        0 25px 70px rgba(0,0,0,.35);
+
+    backdrop-filter: blur(12px);
 }
 
-.task-number {
-    color: var(--warm2);
-    font-size: .8rem;
-    letter-spacing: 3px;
-    text-transform: uppercase;
-}
-
-.task h3 {
-    margin: 12px 0;
-    font-size: 1.25rem;
+.task-box h3 {
+    margin-bottom: 10px;
     font-weight: 400;
 }
 
-.earn-button {
-    margin-top: 20px;
-    padding: 13px 30px;
-    border: 1px solid rgba(238,224,201,.3);
+.task-box p {
+    color: #9d9791;
+    line-height: 1.7;
+}
+
+.task-button {
+    margin-top: 25px;
+
+    padding: 14px 35px;
+
+    color: white;
     background: transparent;
-    color: var(--cream);
+
+    border:
+        1px solid rgba(255,255,255,.3);
+
     cursor: pointer;
+
     transition: .3s;
 }
 
-.earn-button:hover {
-    background: var(--cream);
-    color: var(--bg);
+.task-button:hover {
+    background: white;
+    color: #151515;
 }
 
 .progress {
-    margin-top: 25px;
     height: 3px;
+
     background: rgba(255,255,255,.1);
+
+    margin-top: 25px;
 }
 
-.progress-bar {
-    width: 0%;
+.progress-fill {
     height: 100%;
-    background: var(--warm2);
+    width: 0;
+
+    background: var(--gold);
+
     transition: .5s;
 }
+
 
 /* =========================================================
    PHOTOS
 ========================================================= */
 
 #photos {
+    min-height: 100vh;
+
     padding: 100px 20px;
-    background: #11100e;
+
+    background:
+        linear-gradient(
+            145deg,
+            #b7c5bd,
+            #d7c6a5 45%,
+            #8f9f9d
+        );
+
+    color: #241e1a;
 }
 
-.photos-wrap {
+.photos-inner {
     width: min(1100px, 94vw);
     margin: auto;
 }
 
-.photos-title {
+.photos-heading {
     text-align: center;
 }
 
-.photos-title h2 {
-    font-family: "DM Serif Display", serif;
-    font-size: clamp(3rem, 8vw, 6rem);
-    font-weight: 400;
+.photos-heading span {
+    text-transform: uppercase;
+    letter-spacing: 5px;
+    font-size: .65rem;
 }
 
-.photos-title p {
-    color: var(--muted);
+.photos-heading h2 {
+    font-family:
+        "DM Serif Display",
+        serif;
+
+    font-weight: 400;
+
+    font-size:
+        clamp(3rem, 8vw, 6rem);
+
     margin-top: 10px;
 }
 
-.photo-grid {
+.photos-heading p {
+    color: #5d564e;
+    margin-top: 8px;
+}
+
+
+/* PHOTO WALL */
+
+.photo-wall {
+    margin-top: 65px;
+
     display: grid;
-    grid-template-columns: 1.1fr .9fr 1fr;
-    gap: 28px;
-    margin-top: 60px;
+
+    grid-template-columns:
+        repeat(3, 1fr);
+
+    gap: 30px;
+
+    align-items: start;
 }
 
-.photo-card {
-    background: var(--paper);
-    color: var(--ink);
-    padding: 10px 10px 35px;
-    box-shadow: 0 20px 40px rgba(0,0,0,.4);
-    transition: .35s;
+.photo {
+    position: relative;
+
+    padding: 13px 13px 42px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #fffdf5,
+            #e8e0cf
+        );
+
+    box-shadow:
+        0 25px 40px rgba(50,40,30,.25);
+
+    transition:
+        transform .5s,
+        box-shadow .5s;
 }
 
-.photo-card:nth-child(1) {
-    transform: rotate(-3deg);
-    margin-top: 25px;
+.photo:nth-child(1) {
+    transform: rotate(-4deg);
 }
 
-.photo-card:nth-child(2) {
-    transform: rotate(2deg);
+.photo:nth-child(2) {
+    transform: rotate(3deg);
+    margin-top: 35px;
 }
 
-.photo-card:nth-child(3) {
+.photo:nth-child(3) {
     transform: rotate(-2deg);
-    margin-top: 45px;
+    margin-top: 10px;
 }
 
-.photo-card:hover {
-    transform: rotate(0) translateY(-12px) scale(1.03);
+.photo:hover {
+    transform:
+        translateY(-12px)
+        rotate(0deg)
+        scale(1.025);
+
+    box-shadow:
+        0 35px 55px rgba(50,40,30,.32);
 }
 
-.photo-card img {
-    display: block;
+.photo img {
     width: 100%;
     height: 330px;
+
     object-fit: cover;
-    background: #705038;
+
+    display: block;
+
+    background:
+        linear-gradient(
+            135deg,
+            #aab4b0,
+            #c6b899
+        );
 }
 
-.photo-card:nth-child(2) img {
-    height: 270px;
+.photo:nth-child(2) img {
+    height: 285px;
 }
 
-.caption {
+.photo-caption {
+    margin-top: 15px;
+
     text-align: center;
-    font-family: Kalam, cursive;
-    font-size: 1.2rem;
-    margin-top: 14px;
+
+    font-family:
+        Kalam,
+        cursive;
+
+    font-size: 1.15rem;
 }
+
 
 /* =========================================================
    LETTER
@@ -599,367 +1287,447 @@ section {
 
 #letter {
     min-height: 100vh;
-    padding: 90px 20px;
-    background: #e6d1a6;
-    color: var(--ink);
+
+    padding: 100px 20px;
+
     display: flex;
-    justify-content: center;
     align-items: center;
+    justify-content: center;
+
+    background:
+        linear-gradient(
+            135deg,
+            #e8d6ad,
+            #c6d3c8,
+            #e8b4ba
+        );
+
+    color: #30251e;
 }
 
-.letter-paper {
-    width: min(900px, 94vw);
-    padding: 70px 60px;
-    min-height: 600px;
-    position: relative;
+.paper {
+    width: min(850px, 94vw);
+
+    padding:
+        70px
+        clamp(25px, 8vw, 80px);
+
     background:
         repeating-linear-gradient(
             0deg,
-            #f3e1bb 0,
-            #f3e1bb 34px,
-            #ecd7ad 35px
+            #fff8e8 0,
+            #fff8e8 31px,
+            #f3e7cd 32px
         );
-    box-shadow: 0 25px 70px rgba(0,0,0,.3);
+
+    box-shadow:
+        0 35px 80px rgba(30,25,20,.3);
+
+    transform: rotate(-.5deg);
 }
 
-.letter-paper h2 {
+.paper-top {
     text-align: center;
-    font-family: "DM Serif Display", serif;
-    font-weight: 400;
-    font-size: clamp(3rem, 8vw, 5rem);
-    margin-bottom: 40px;
+
+    font-family:
+        Kalam,
+        cursive;
+
+    color: #9d7659;
+
+    margin-bottom: 30px;
 }
 
-.message {
-    padding: 30px;
-    border: 1px dashed rgba(48,32,21,.3);
-    font-family: Kalam, cursive;
-    font-size: 1.3rem;
+.paper h2 {
+    text-align: center;
+
+    font-family:
+        "DM Serif Display",
+        serif;
+
+    font-weight: 400;
+
+    font-size:
+        clamp(3rem, 8vw, 5.5rem);
+
+    margin-bottom: 35px;
+}
+
+.letter-text {
+    font-family:
+        Kalam,
+        cursive;
+
+    font-size:
+        clamp(1.1rem, 2vw, 1.4rem);
+
     line-height: 2;
+
     white-space: pre-line;
 }
 
-.final-button {
+.letter-button {
     display: block;
-    margin: 40px auto 0;
-    padding: 14px 34px;
-    border: 1px solid var(--ink);
-    background: var(--ink);
-    color: var(--paper);
+
+    margin:
+        45px auto
+        0;
+
+    padding:
+        14px 32px;
+
+    border:
+        1px solid #392b22;
+
+    background:
+        #392b22;
+
+    color:
+        #fff2d6;
+
     cursor: pointer;
-    transition: .25s;
 }
 
-.final-button:hover {
-    background: transparent;
-    color: var(--ink);
-}
 
 /* =========================================================
    END
 ========================================================= */
 
-#ending {
+#end {
     min-height: 100vh;
+
     display: flex;
     align-items: center;
     justify-content: center;
+
     text-align: center;
+
     background:
         radial-gradient(
-            ellipse at center,
-            #382519,
-            #080706
+            circle at center,
+            #40554d,
+            #151514 65%
         );
 }
 
 .end-content {
-    width: min(700px, 90vw);
+    width: 90%;
 }
 
-.end-small {
+.end-content .small {
     text-transform: uppercase;
     letter-spacing: 5px;
-    font-size: .7rem;
-    color: var(--muted);
+    font-size: .65rem;
+    color: #b8afa2;
 }
 
 .end-content h2 {
-    font-family: "DM Serif Display", serif;
-    font-size: clamp(4rem, 11vw, 7rem);
+    font-family:
+        "DM Serif Display",
+        serif;
+
     font-weight: 400;
+
+    font-size:
+        clamp(4rem, 12vw, 8rem);
+
     margin: 20px 0;
 }
 
 .end-content p {
-    color: var(--muted);
-    line-height: 1.8;
+    color: #a7a09a;
 }
 
-.end-tea {
-    position: relative;
-    width: 110px;
-    height: 160px;
-    margin: 50px auto 0;
-}
-
-.end-glass {
-    position: absolute;
-    left: 8px;
-    bottom: 15px;
-    width: 94px;
-    height: 130px;
-    clip-path: polygon(
-        5% 0,
-        95% 0,
-        82% 100%,
-        18% 100%
-    );
-    border: 3px solid rgba(255,255,255,.35);
-    overflow: hidden;
-}
-
-.end-liquid {
-    position: absolute;
-    bottom: 0;
-    width: 100%;
-    height: 75%;
-    background: #7b3313;
-}
-
-.end-saucer {
-    position: absolute;
-    bottom: 0;
-    width: 110px;
-    height: 22px;
-    border-radius: 50%;
-    background: #b89b72;
-}
 
 /* =========================================================
    MOBILE
 ========================================================= */
 
-@media (max-width: 750px) {
+@media(max-width: 760px) {
 
-    .room-label {
-        top: 30px;
-        left: 25px;
+    .window {
+        width: 55%;
+        height: 36%;
+        left: 5%;
     }
 
-    .room-label h2 {
-        font-size: 2rem;
+    .banner {
+        width: 50%;
+        right: 2%;
+        top: 12%;
+    }
+
+    .person {
+        transform:
+            translateX(-50%)
+            scale(.75);
+
+        top: 24%;
     }
 
     .teapot {
-        left: 8%;
-        transform: scale(.72);
-        transform-origin: bottom left;
+        left: 24%;
+        top: 31%;
+        transform: scale(.78);
     }
 
-    .glass-area {
-        left: 61%;
+    .tea-glass {
+        left: 58%;
+        top: 36%;
         transform: scale(.82);
-        transform-origin: bottom left;
     }
 
-    .photo-grid {
+    .cake {
+        top: 30%;
+        left: 50%;
+        transform:
+            translateX(-50%)
+            scale(.7);
+    }
+
+    .photo-wall {
         grid-template-columns: 1fr;
         max-width: 450px;
         margin-left: auto;
         margin-right: auto;
     }
 
-    .photo-card:nth-child(1),
-    .photo-card:nth-child(2),
-    .photo-card:nth-child(3) {
+    .photo:nth-child(1),
+    .photo:nth-child(2),
+    .photo:nth-child(3) {
         margin-top: 0;
     }
 
-    .letter-paper {
-        padding: 50px 25px;
+    .paper {
+        padding-top: 50px;
+        padding-bottom: 50px;
     }
 }
 </style>
 </head>
 
+
 <body>
 
 
 <!-- =====================================================
-     OPENING
+     SCENE 1
 ===================================================== -->
 
-<section id="opening">
+<section id="scene" class="scene">
 
-    <div class="opening-content">
+    <div class="wall"></div>
 
-        <div class="mini">
-            For Mazonty
+    <div class="window"></div>
+
+
+    <!-- BIRTHDAY LIGHTS -->
+
+    <div class="lights">
+
+        <div class="bulb"></div>
+        <div class="bulb"></div>
+        <div class="bulb"></div>
+        <div class="bulb"></div>
+        <div class="bulb"></div>
+
+    </div>
+
+
+    <!-- BIRTHDAY BANNER -->
+
+    <div class="banner">
+
+        <span>H</span>
+        <span>A</span>
+        <span>P</span>
+        <span>P</span>
+        <span>Y</span>
+
+        <br>
+
+        <span>B</span>
+        <span>D</span>
+        <span>A</span>
+        <span>Y</span>
+
+    </div>
+
+
+    <!-- PERSON SITTING OPPOSITE -->
+
+    <div class="person">
+
+        <div class="chair"></div>
+
+        <div class="head"></div>
+
+        <div class="body"></div>
+
+    </div>
+
+
+    <!-- TABLE -->
+
+    <div class="table">
+
+        <div class="plate"></div>
+
+
+        <div class="cake">
+
+            <div class="candle">
+
+                <div class="flame"></div>
+
+            </div>
+
+        </div>
+
+
+        <!-- TEAPOT -->
+
+        <div
+            class="teapot"
+            id="teapot"
+            onclick="pourTea()"
+        >
+
+            <div class="teapot-lid"></div>
+
+            <div class="teapot-knob"></div>
+
+            <div class="teapot-handle"></div>
+
+            <div class="teapot-spout"></div>
+
+            <div class="teapot-body"></div>
+
+        </div>
+
+
+        <!-- GLASS -->
+
+        <div
+            class="tea-glass"
+            id="teaGlass"
+            onclick="pourTea()"
+        >
+
+            <div class="glass-body">
+
+                <div
+                    class="tea"
+                    id="tea"
+                ></div>
+
+                <div class="tea-surface"></div>
+
+                <div class="glass-shine"></div>
+
+            </div>
+
+            <div class="saucer"></div>
+
+        </div>
+
+
+        <div
+            class="tea-stream"
+            id="teaStream"
+        ></div>
+
+
+        <div
+            class="steam a"
+            id="steam1"
+        ></div>
+
+        <div
+            class="steam b"
+            id="steam2"
+        ></div>
+
+
+        <!-- CONFETTI -->
+
+        <div class="confetti">
+
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+
+        </div>
+
+    </div>
+
+
+    <div class="scene-title">
+
+        <div class="small">
+            a little birthday thing
         </div>
 
         <h1>
-            Come<br>
-            Here.
+            Happy Birthday, Mazonty.
         </h1>
 
         <p>
-            I made you something.
-            Don't ask too many questions.
-            Just go with it.
+            Before anything else... pour yourself some tea.
         </p>
 
-        <button
-            class="start"
-            onclick="goTo('teaRoom')"
-        >
-            Okay, fine.
-        </button>
-
     </div>
 
 </section>
 
 
 <!-- =====================================================
-     TEA SCENE
+     SCENE 2 — EARN IT
 ===================================================== -->
 
-<section id="teaRoom">
+<section id="earn" class="scene">
 
-    <div class="wall-light"></div>
+    <div class="earn-container">
 
-    <div class="room-label">
-
-        <span>Step one</span>
-
-        <h2>Make the tea.</h2>
-
-    </div>
-
-
-    <div class="table">
-        <div class="table-top"></div>
-    </div>
-
-
-    <!-- TEAPOT -->
-
-    <div
-        class="teapot"
-        id="teapot"
-        onclick="pourTea()"
-    >
-
-        <div class="lid"></div>
-
-        <div class="handle"></div>
-
-        <div class="spout"></div>
-
-        <div class="pot"></div>
-
-    </div>
-
-
-    <!-- POURING STREAM -->
-
-    <div
-        class="stream"
-        id="stream"
-    ></div>
-
-
-    <!-- TEA GLASS -->
-
-    <div class="glass-area">
-
-        <div class="steam one"></div>
-        <div class="steam two"></div>
-        <div class="steam three"></div>
-
-        <div class="glass">
-
-            <div
-                class="liquid"
-                id="liquid"
-            ></div>
-
-            <div class="surface"></div>
-
-            <div class="shine"></div>
-
-        </div>
-
-        <div class="saucer"></div>
-
-    </div>
-
-
-    <div class="tea-help">
-
-        <div>
-            Click the teapot.
-        </div>
-
-        <div id="teaStatus">
-            The tea is empty.
-        </div>
-
-    </div>
-
-</section>
-
-
-<!-- =====================================================
-     EARN THE NICE PART
-===================================================== -->
-
-<section id="earn">
-
-    <div class="earn-box">
-
-        <div class="earn-label">
-            You have to earn it.
+        <div class="label">
+            You have to earn the nice part
         </div>
 
         <h2>
-            The nice part.
+            Not yet.
         </h2>
 
         <p>
-            You thought I was just going to give you
-            everything immediately?
-            Absolutely not.
+            You thought I was going to make this easy?
+            Please. You know me better than that.
         </p>
 
 
-        <div class="task">
+        <div class="task-box">
 
-            <div class="task-number">
-                Task 01
-            </div>
-
-            <h3>
-                Click the button.
+            <h3 id="taskTitle">
+                First, prove you're patient.
             </h3>
 
-            <p id="taskText">
-                That's it. Start easy.
+            <p id="taskDescription">
+                Click the button.
             </p>
 
             <button
-                class="earn-button"
-                onclick="completeTask()"
+                class="task-button"
+                id="taskButton"
+                onclick="earn()"
             >
-                Do it
+                Fine.
             </button>
 
             <div class="progress">
 
                 <div
-                    class="progress-bar"
-                    id="progressBar"
+                    class="progress-fill"
+                    id="progress"
                 ></div>
 
             </div>
@@ -977,66 +1745,70 @@ section {
 
 <section id="photos">
 
-    <div class="photos-wrap">
+    <div class="photos-inner">
 
-        <div class="photos-title">
+        <div class="photos-heading">
+
+            <span>
+                okay fine
+            </span>
 
             <h2>
-                Okay.
+                You earned these.
             </h2>
 
             <p>
-                Maybe you earned this part.
+                Don't let it get to your head.
             </p>
 
         </div>
 
 
-        <div class="photo-grid">
+        <div class="photo-wall">
 
 
-            <!-- PHOTO ONE -->
+            <!-- PHOTO 1 -->
 
-            <div class="photo-card">
+            <div class="photo">
 
                 <img
                     src="photo1.jpg"
-                    alt="Photo 1"
+                    alt="Birthday memory"
                 >
 
-                <div class="caption">
-                    the cutest femboy ever
-                </div>
-
-            </div>
-
-
-            <!-- PHOTO TWO -->
-
-            <div class="photo-card">
-
-                <img
-                    src="photo2.jpg"
-                    alt="Photo 2"
-                >
-
-                <div class="caption">
+                <div class="photo-caption">
                     where did this sweet baby boy go?
                 </div>
 
             </div>
 
 
-            <!-- PHOTO THREE -->
+            <!-- PHOTO 2 -->
 
-            <div class="photo-card">
+            <div class="photo">
+
+                <img
+                    src="photo2.jpg"
+                    alt="Birthday memory"
+                >
+
+                <div class="photo-caption">
+                    the cutest femboy ever
+                </div>
+
+            </div>
+
+
+            <!-- PHOTO 3 -->
+
+            <div class="photo">
 
                 <img
                     src="photo3.jpg"
-                    alt="Photo 3"
+                    alt="Birthday memory"
                 >
 
-                <div class="caption">
+                <div class="photo-caption">
                     we look so good (i look better ofc)<br>
                     My fav day btw
                 </div>
@@ -1047,8 +1819,13 @@ section {
 
 
         <button
-            class="earn-button"
-            style="display:block;margin:70px auto 0;"
+            class="task-button"
+            style="
+                display:block;
+                margin:70px auto 0;
+                color:#241e1a;
+                border-color:#241e1a;
+            "
             onclick="goTo('letter')"
         >
             One last thing.
@@ -1060,27 +1837,32 @@ section {
 
 
 <!-- =====================================================
-     PERSONAL MESSAGE
+     LETTER
 ===================================================== -->
 
 <section id="letter">
 
-    <div class="letter-paper">
+    <div class="paper">
+
+        <div class="paper-top">
+            written specifically for you
+        </div>
 
         <h2>
-            hey.
+            hey mazonty.
         </h2>
 
-        <div class="message">hey mazonty, so this is awkward but wtvr . first of all, don't think i'm not mad at you cuz i am but wtvr 
- anyways i love so much or wtvr and i miss you even more 
-u r a decent person and you deserve decent things even tho u r a pedophile 
- i hope 18 treats u well and u get the car license u want (and ofc the 100% in qudurat) anyways i love you much baby</div>
+        <div class="letter-text">hey mazonty, so this is awkward but happy birthdayyy
+Ugh wtvrr. first of all, don't think i'm not mad at cuz i am but wtvr 
+ anyways i love so much or wtvr and i miss you even more u r a decent person and you deserve decent things 
+i hope 18 treats u well and u get the car license u want (and ofc the 100% in qudurat) anyways i love you much baby</div>
+
 
         <button
-            class="final-button"
-            onclick="goTo('ending')"
+            class="letter-button"
+            onclick="goTo('end')"
         >
-            That's all.
+            Okay. That's it.
         </button>
 
     </div>
@@ -1089,15 +1871,15 @@ u r a decent person and you deserve decent things even tho u r a pedophile
 
 
 <!-- =====================================================
-     ENDING
+     END
 ===================================================== -->
 
-<section id="ending">
+<section id="end" class="scene">
 
     <div class="end-content">
 
-        <div class="end-small">
-            End of the website
+        <div class="small">
+            end of your birthday experience
         </div>
 
         <h2>
@@ -1105,20 +1887,8 @@ u r a decent person and you deserve decent things even tho u r a pedophile
         </h2>
 
         <p>
-            You made it to the end.
+            Happy 18th, idiot.
         </p>
-
-        <div class="end-tea">
-
-            <div class="end-glass">
-
-                <div class="end-liquid"></div>
-
-            </div>
-
-            <div class="end-saucer"></div>
-
-        </div>
 
     </div>
 
@@ -1133,12 +1903,12 @@ u r a decent person and you deserve decent things even tho u r a pedophile
 
 function goTo(id) {
 
-    const section =
+    const element =
         document.getElementById(id);
 
-    if (!section) return;
+    if (!element) return;
 
-    section.scrollIntoView({
+    element.scrollIntoView({
         behavior: "smooth"
     });
 
@@ -1149,142 +1919,165 @@ function goTo(id) {
    TEA POURING
 ========================================================= */
 
-let teaFinished = false;
+let teaDone = false;
 
 function pourTea() {
 
-    if (teaFinished) return;
+    if (teaDone) return;
 
-    teaFinished = true;
+    teaDone = true;
 
-    const teapot =
+    const pot =
         document.getElementById("teapot");
 
+    const tea =
+        document.getElementById("tea");
+
     const stream =
-        document.getElementById("stream");
+        document.getElementById("teaStream");
 
-    const liquid =
-        document.getElementById("liquid");
+    const steam1 =
+        document.getElementById("steam1");
 
-    const status =
-        document.getElementById("teaStatus");
-
-    const steam =
-        document.querySelectorAll(".steam");
+    const steam2 =
+        document.getElementById("steam2");
 
 
-    /* Tilt teapot */
+    /* Tilt the teapot */
 
-    teapot.style.transform =
-        "rotate(-18deg) translateY(-8px)";
-
-
-    /* Start actual tea stream */
-
-    stream.classList.add("active");
+    pot.style.transform =
+        "rotate(-19deg) translateY(-8px)";
 
 
-    /* Fill the glass */
+    /* Tea starts falling */
 
-    setTimeout(() => {
+    stream.style.opacity = "1";
 
-        liquid.style.height = "76%";
-
-    }, 200);
+    stream.style.height = "95px";
 
 
-    /* Steam begins */
+    /* Tea fills the glass */
 
     setTimeout(() => {
 
-        steam.forEach(item => {
-            item.classList.add("show");
-        });
+        tea.style.height = "68%";
 
-    }, 900);
+    }, 350);
 
 
-    /* Finish pouring */
+    /* Steam */
 
     setTimeout(() => {
 
-        stream.classList.remove("active");
+        steam1.classList.add("active");
+        steam2.classList.add("active");
 
-        teapot.style.transform =
+    }, 700);
+
+
+    /* Stop pouring */
+
+    setTimeout(() => {
+
+        stream.style.opacity = "0";
+        stream.style.height = "0";
+
+        pot.style.transform =
             "rotate(0deg)";
-
-        status.textContent =
-            "There. Tea."
 
     }, 2300);
 
 
-    /* Continue */
+    /* Move on */
 
     setTimeout(() => {
 
         goTo("earn");
 
-    }, 3200);
+    }, 3400);
 
 }
 
 
 /* =========================================================
-   EARN THE NICE PART
+   EARN SYSTEM
 ========================================================= */
 
-let taskProgress = 0;
+let progress = 0;
 
-const taskMessages = [
+const messages = [
 
-    "That's it. Start easy.",
+    [
+        "First, prove you're patient.",
+        "Click the button."
+    ],
 
-    "Okay, you can follow instructions.",
+    [
+        "Okay.",
+        "That was suspiciously easy."
+    ],
 
-    "Don't get too confident.",
+    [
+        "Again.",
+        "You don't get the nice part yet."
+    ],
 
-    "You're getting there.",
+    [
+        "You're actually doing this.",
+        "Interesting."
+    ],
 
-    "Almost.",
+    [
+        "Almost.",
+        "Don't get excited."
+    ],
 
-    "Fine. Maybe you deserve it.",
+    [
+        "Fine.",
+        "You're getting there."
+    ],
 
-    "Okay. You earned it."
+    [
+        "Okay.",
+        "You earned it."
+    ]
 
 ];
 
-function completeTask() {
 
-    taskProgress++;
+function earn() {
 
-    if (taskProgress > 7) {
-        taskProgress = 7;
+    progress++;
+
+    if (progress > 7) {
+        progress = 7;
     }
 
-    const text =
-        document.getElementById("taskText");
+    document.getElementById("taskTitle")
+        .textContent =
+        messages[progress - 1][0];
 
-    const bar =
-        document.getElementById("progressBar");
+    document.getElementById("taskDescription")
+        .textContent =
+        messages[progress - 1][1];
 
-    const button =
-        document.querySelector(".earn-button");
-
-    text.textContent =
-        taskMessages[taskProgress - 1];
-
-    bar.style.width =
-        ((taskProgress / 7) * 100) + "%";
+    document.getElementById("progress")
+        .style.width =
+        (progress / 7 * 100) + "%";
 
 
-    if (taskProgress === 7) {
+    if (progress === 7) {
+
+        const button =
+            document.getElementById("taskButton");
 
         button.textContent =
-            "Okay, continue.";
+            "Go on.";
 
-        button.onclick = () => {
+        button.onclick = function() {
+
             goTo("photos");
+
         };
 
     }
@@ -1293,22 +2086,24 @@ function completeTask() {
 
 
 /* =========================================================
-   PHOTO REVEAL
+   PHOTO ENTRANCE
 ========================================================= */
 
-const observer =
+const photoObserver =
     new IntersectionObserver(
         entries => {
 
             entries.forEach(entry => {
 
-                if (entry.isIntersecting) {
+                if (
+                    entry.isIntersecting
+                ) {
 
-                    entry.target.style.opacity = "1";
+                    entry.target.style.opacity =
+                        "1";
 
                     entry.target.style.transform =
-                        entry.target.dataset.originalTransform ||
-                        "translateY(0)";
+                        "rotate(0deg) translateY(0)";
 
                 }
 
@@ -1316,84 +2111,90 @@ const observer =
 
         },
         {
-            threshold: .12
+            threshold: .2
         }
     );
 
 
 document
-    .querySelectorAll(".photo-card")
-    .forEach(card => {
+    .querySelectorAll(".photo")
+    .forEach(photo => {
 
-        card.dataset.originalTransform =
-            getComputedStyle(card).transform;
+        photo.style.opacity = "0";
 
-        card.style.opacity = "0";
+        photo.style.transform =
+            "translateY(50px)";
 
-        card.style.transform =
-            "translateY(40px)";
-
-        card.style.transition =
+        photo.style.transition =
             "opacity .8s ease, transform .8s ease";
 
-        observer.observe(card);
+        photoObserver.observe(photo);
 
     });
 
 
 /* =========================================================
-   SMALL CLICK PARTICLES
+   RANDOM CONFETTI MOTION
 ========================================================= */
 
-document.addEventListener("click", event => {
+document
+    .querySelectorAll(".confetti span")
+    .forEach((piece, index) => {
 
-    const particle =
-        document.createElement("div");
+        piece.style.animationDelay =
+            (index * .45) + "s";
 
-    particle.textContent = "·";
+    });
 
-    particle.style.position = "fixed";
-    particle.style.left =
-        event.clientX + "px";
-    particle.style.top =
-        event.clientY + "px";
 
-    particle.style.color =
-        "#c48b52";
+/* =========================================================
+   SUBTLE PARALLAX
+========================================================= */
 
-    particle.style.pointerEvents =
-        "none";
+const scene =
+    document.getElementById("scene");
 
-    particle.style.zIndex =
-        "9999";
+window.addEventListener(
+    "mousemove",
+    event => {
 
-    document.body.appendChild(
-        particle
-    );
+        if (
+            window.innerWidth < 760
+        ) return;
 
-    particle.animate(
-        [
-            {
-                opacity: 1,
-                transform:
-                    "translateY(0) scale(1)"
-            },
-            {
-                opacity: 0,
-                transform:
-                    "translateY(-25px) scale(2)"
-            }
-        ],
-        {
-            duration: 600
-        }
-    );
+        const x =
+            (event.clientX /
+            window.innerWidth - .5);
 
-    setTimeout(() => {
-        particle.remove();
-    }, 600);
+        const y =
+            (event.clientY /
+            window.innerHeight - .5);
 
-});
+
+        const person =
+            document.querySelector(".person");
+
+        const banner =
+            document.querySelector(".banner");
+
+        const teapot =
+            document.querySelector(".teapot");
+
+
+        person.style.marginLeft =
+            (x * 12) + "px";
+
+        person.style.marginTop =
+            (y * 8) + "px";
+
+        banner.style.marginLeft =
+            (x * -10) + "px";
+
+        teapot.style.marginLeft =
+            (x * 6) + "px";
+
+    }
+);
 
 </script>
 
